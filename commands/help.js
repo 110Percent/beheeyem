@@ -36,11 +36,6 @@ exports.action = (msg, args) => {
                     name: "b.type",
                     value: "`b.type psychic`\nShows the damage modifiers between a set of types and others. Multiple types can be inputted.",
                     inline: true
-                },
-                {
-                    name: "b.edit",
-                    value: "Checks the most recently edited message in the current channel.",
-                    inline: true
                 }
             ]
         }
