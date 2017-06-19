@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "csvjson": "^2.2.2",
-    "discord.js": "hydrabolt/discord.js#indev",
+    "discord.js": "^11.1.0",
     "jsonfile": "^2.4.0",
+    "moment": "^2.18.1",
     "nodemw": "^0.10.1",
     "pako": "^1.0.4",
     "superagent": "^3.3.1",

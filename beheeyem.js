@@ -53,14 +53,14 @@ beheeyem.on("message", msg => {
                 msg.channel.sendFile("https://i.imgur.com/pIxQQXA.png", "DEATHBIRD.png");
             } else if (cmd == "youtried") {
                 msg.channel.sendFile("https://i.imgur.com/bAxMdQ0.png", "Filename.jpeg.gif.webp.mp4.exe.bat.sh.app.png");
-            }
-
-            if (msg.author.id == 120887602395086848) {
+            } else if (msg.author.id == 120887602395086848) {
                 if (cmd == "addnonya") {
                     var nonyas = require("./data/nonyas.json");
                     nonyas.nonyas.push(args);
                     jsonfile.writeFileSync("./data/nonyas.json", nonyas);
                     msg.channel.sendMessage("👌🏾 Sucessfully added Nonya!");
+                } else if (cmd == 'eval') {
+                    msg.channel.sendMessage(eval(args));
                 }
             }
         }
@@ -74,7 +74,12 @@ beheeyem.login(config.token);
 
 beheeyem.on("guildCreate", (guild) => {
     try {
-        request.post("https://bots.discord.pw/api/bots/" + beheeyem.user.id + "/stats", {
+        request.post({
+            url: "https://bots.discord.pw/api/bots/" + beheeyem.user.id + "/stats",
+            headers: {
+                authorization: config.dbotsToken
+            }
+        }, {
             server_count: beheeyem.guilds.size
         });
     } catch (err) {
@@ -93,30 +98,26 @@ function checkItalics(msg) {
     for (var i = 1; i < asteriskSplit.length - 1; i++) {
         var pokeName = asteriskSplit[i].toLowerCase();
         pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
-        try {
-            msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
-        } catch (err) {
-            if (!err) {
-                console.log(pokeName);
+        request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
+            if (response.statusCode == 200){
+                msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
                 isFound = true;
-                break;
             }
-        }
+        });
+        if (isFound) break;
     }
     if (!isFound) {
         var underSplit = msg.content.split("_");
         for (var i = 1; i < underSplit.length - 1; i++) {
             var pokeName = underSplit[i].toLowerCase();
             pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
-            try {
-                msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
-            } catch (err) {
-                if (!err) {
-                    console.log(pokeName);
-                    isFound = true;
-                    break;
+            request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
+                if (response.statusCode == 200){
+                    isFound == true;
+                    msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
                 }
-            }
+            });
+            if (isFound) break;
         }
     }
 }

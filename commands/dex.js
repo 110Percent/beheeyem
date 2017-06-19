@@ -33,7 +33,6 @@ exports.action = (msg, args) => {
     }
     if (!pokeEntry) {
         for (var i = 0; i < Object.keys(dex).length; i++) {
-            console.log(i);
             if (dex[Object.keys(dex)[i]].species.toLowerCase() == poke) {
                 pokeEntry = dex[Object.keys(dex)[i]];
                 break;
@@ -151,7 +150,6 @@ exports.action = (msg, args) => {
                 icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
             }
         };
-        console.log(dexEmbed);
 
         msg.channel.sendMessage("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
             embed: dexEmbed
