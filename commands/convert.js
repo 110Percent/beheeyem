@@ -2,7 +2,6 @@ const convert = require('convert-units');
 let units = convert().possibilities();
 
 exports.action = (msg, args) => {
-    args = args.toLowerCase();
     if (args) {
         if (args.split(' ')[0].match(/^-?\d+\.?\d*$/) && args.split(' ')[2] == 'to') {
             if (units.indexOf(args.split(' ')[1]) != -1) {
