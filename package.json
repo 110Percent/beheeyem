@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "convert-units": "^2.2.0",
     "csvjson": "^2.2.2",
     "discord.js": "^11.1.0",
     "jsonfile": "^2.4.0",
