@@ -49,7 +49,7 @@ exports.action = (msg, args) => {
                 },
                 {
                     name: 'Last Seen',
-                    value: moment(targetUser.user.lastMessage.createdTimestamp).calendar() + ' (Eastern)',
+                    value: targetUser.user.lastMessage ? moment(targetUser.user.lastMessage.createdTimestamp).calendar() + ' (Eastern)' : 'Unknown',
                     inline: true
                 },
                 {
