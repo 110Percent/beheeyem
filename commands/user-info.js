@@ -21,7 +21,7 @@ exports.action = (msg, args) => {
         }
     }
     let cStatus = targetUser.user.presence.status;
-    if (targetUser.user.presence.game.streaming) cStatus = 'streaming';
+    if (targetUser.user.presence.game && targetUser.user.presence.game.streaming) cStatus = 'streaming';
     msg.channel.send('**' + targetUser.displayName + '**', {
         embed: {
             thumbnail: {
