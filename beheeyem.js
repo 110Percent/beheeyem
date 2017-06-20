@@ -46,7 +46,7 @@ beheeyem.on("message", msg => {
             var args = commandstring.substring(cmd.length + 1);
 
             if (commands[cmd]) {
-                commands[cmd].action(msg, args)
+                commands[cmd].action(msg, args, beheeyem);
             } else if (cmd == "obtain") {
                 msg.channel.sendMessage("Honestly, just use Bulbapedia. The encounter data on the web is so inconsistent and undreadable that there's no way I could create an obtainability command. Sorry about that. 🙁");
             } else if (cmd == "deathbird") {
@@ -99,7 +99,7 @@ function checkItalics(msg) {
         var pokeName = asteriskSplit[i].toLowerCase();
         pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
         request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
-            if (response.statusCode == 200){
+            if (response.statusCode == 200) {
                 msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
                 isFound = true;
             }
@@ -112,7 +112,7 @@ function checkItalics(msg) {
             var pokeName = underSplit[i].toLowerCase();
             pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
             request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
-                if (response.statusCode == 200){
+                if (response.statusCode == 200) {
                     isFound == true;
                     msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
                 }
