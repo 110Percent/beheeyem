@@ -8,7 +8,7 @@ let statusEmojis = {
     'streaming': '<:streaming:313956277132853248>'
 }
 
-exports.action = (msg, args) => {
+exports.action = (msg, args, beheeyem) => {
 
     let targetUser;
 
@@ -20,6 +20,7 @@ exports.action = (msg, args) => {
             }
         }
     }
+    targetUser.user = beheeyem.fetchUser(targetUser.user.id);
     let cStatus = targetUser.user.presence.status;
     if (targetUser.user.presence.game && targetUser.user.presence.game.streaming) cStatus = 'streaming';
     msg.channel.send('**' + targetUser.displayName + '**', {
@@ -54,7 +55,7 @@ exports.action = (msg, args) => {
                 },
                 {
                     name: 'Status',
-                    value: statusEmojis[cStatus] + 'Currently **' + capitalizeFirstLetter(cStatus) + "**",
+                    value: statusEmojis[cStatus] + ' Currently **' + capitalizeFirstLetter(cStatus) + "**",
                     inline: true
                 },
                 {
