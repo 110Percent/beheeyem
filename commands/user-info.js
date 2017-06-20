@@ -20,7 +20,6 @@ exports.action = (msg, args, beheeyem) => {
             }
         }
     }
-    targetUser.user = beheeyem.fetchUser(targetUser.user.id);
     let cStatus = targetUser.user.presence.status;
     if (targetUser.user.presence.game && targetUser.user.presence.game.streaming) cStatus = 'streaming';
     msg.channel.send('**' + targetUser.displayName + '**', {
