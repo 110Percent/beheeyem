@@ -3,7 +3,7 @@ const moment = require('moment');
 let statusEmojis = {
     'online': '<:online:313956277808005120>',
     'offline': '<:offline:313956277237710868>',
-    'away': '<:away:313956277220802560>',
+    'idle': '<:away:313956277220802560>',
     'dnd': '<:dnd:313956276893646850>',
     'streaming': '<:streaming:313956277132853248>'
 }
