@@ -34,7 +34,17 @@ exports.action = (msg, args) => {
                 },
                 {
                     name: "b.type",
-                    value: "`b.type psychic`\nShows the damage modifiers between a set of types and others. Multiple types can be inputted.",
+                    value: "`b.type psychic`\nShows the damage modifiers for a set\nof types.Multiple types can be entered.",
+                    inline: true
+                },
+                {
+                    name: 'b.convert',
+                    value: '`b.convert 5 km to mi`\nConvert a value between two units.',
+                    inline: true
+                },
+                {
+                    name: 'b.user-info',
+                    value: '`b.user-info <mention>`\nDisplays informaton on a user.',
                     inline: true
                 }
             ]
