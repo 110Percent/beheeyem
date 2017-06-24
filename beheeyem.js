@@ -4,6 +4,7 @@ const fs = require("fs");
 const jsonfile = require("jsonfile");
 const path = require("path");
 const request = require("request");
+const colors = require('colors');
 var config = require('./config.js');
 
 var imageCheck;
@@ -11,30 +12,39 @@ var imageCheck;
 console.log("Starting Beheeyem...");
 
 var commands = loadCommands();
-console.log(commands);
 
 beheeyem.on("ready", function() {
-    console.log("Beheeyem is active! Currently serving in " + beheeyem.guilds.size + " guilds.\n");
+    console.log(("Beheeyem is active! Currently serving in " + String(beheeyem.guilds.size).white + " guilds.\n".green).bold);
     beheeyem.user.setGame("b.help");
     try {
         request.post("https://bots.discord.pw/api/bots/" + beheeyem.user.id + "/stats", {
             server_count: beheeyem.guilds.size
         });
     } catch (err) {
-        console.log("Could not update server count on Discord Bots website.");
+        console.log("Could not update server count on Discord Bots website.".yellow);
     }
 
 
 });
 
 function loadCommands() {
+    console.log('Loading commands...'.cyan)
     var commands = {};
+    let errCount = 0;
     cmdfiles = fs.readdirSync('./commands/');
-    console.log(cmdfiles)
     cmdfiles.forEach(filename => {
         var cmdName = filename.split('.')[0];
-        commands[cmdName] = require('./commands/' + filename);
-    })
+        try {
+            commands[cmdName] = require('./commands/' + filename);
+            console.log('Loaded '.green + cmdName.yellow.bold);
+        } catch (err) {
+            if (err) {
+                errCount++;
+                console.log('Error in '.red + cmdName.yellow + '!'.red);
+            }
+        }
+    });
+    console.log('Loaded commands with '.cyan + (errCount > 0 ? errCount.red : 'no'.green) + ' errors!'.cyan);
     return commands;
 }
 
@@ -83,7 +93,7 @@ beheeyem.on("guildCreate", (guild) => {
             server_count: beheeyem.guilds.size
         });
     } catch (err) {
-        console.log("Could not update server count on Discord Bots website.");
+        console.log("Could not update server count on Discord Bots website.".yellow);
     }
 });
 

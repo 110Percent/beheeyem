@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "colors": "^1.1.2",
     "convert-units": "^2.2.0",
     "csvjson": "^2.2.2",
     "discord.js": "^11.1.0",
