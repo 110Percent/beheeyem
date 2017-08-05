@@ -12842,7 +12842,7 @@ exports.BattlePokedex = {
 		species: "Missingno.",
 		types: ["Bird", "Normal"],
 		baseStats: {hp: 33, atk: 136, def: 0, spa: 6, spd: 6, spe: 29},
-		abilities: {0: ""},
+		abilities: {0: "none"},
 		heightm: 3,
 		weightkg: 1590.8,
 		color: "Gray",
