@@ -7,26 +7,61 @@ body {
     font-family: 'Whitney Medium';
 }
 
+p {
+    font-size: 1.6rem;
+}
+
 #topbox {
     height: 100px;
 }
 
 #mainhero {
     top: 50px;
+    overflow: auto;
+    padding-bottom: 100px;
 }
 
 #mainherotext {
+    display: inline-block;
+    width: 50%;
+    padding-top: 125px;
     vertical-align: text-top;
+    text-align: center;
+}
+
+#mainherotitle {
+    font-family: 'Whitney Black';
+    font-size: 4rem;
+}
+
+#mainherosmolwrapper {
+    padding-left: 35%;
+}
+
+#smolbeewrapper {
+    width: 35%;
+    padding-right: 40%;
+    float: right;
 }
 
 #cover-beheeyem {
-    width: 400px;
-    float: right;
-    padding-right: 300px;
+    width: 100%;
+}
+
+#coverbeewrapper {
+    width: 50%;
     display: inline-block;
+    float: right;
 }
 
 @font-face {
     font-family: 'Whitney Medium';
-    src: url("../font/WhitneyMedium.ttf") format("ttf");
+    src: url('../font/WhitneyMedium.ttf') format('truetype'), url('../font/WhitneyMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Whitney Black';
+    src: url('../font/whitney_black-webfont.ttf') format('truetype');
 }
