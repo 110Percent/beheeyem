@@ -1,0 +1,32 @@
+body {
+    background-color: #2C2F33;
+    color: white;
+}
+
+* {
+    font-family: 'Whitney Medium';
+}
+
+#topbox {
+    height: 100px;
+}
+
+#mainhero {
+    top: 50px;
+}
+
+#mainherotext {
+    vertical-align: text-top;
+}
+
+#cover-beheeyem {
+    width: 400px;
+    float: right;
+    padding-right: 300px;
+    display: inline-block;
+}
+
+@font-face {
+    font-family: 'Whitney Medium';
+    src: url("../font/Whitney Medium.ttf") format("ttf");
+}
