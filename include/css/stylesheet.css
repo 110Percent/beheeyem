@@ -1,3 +1,9 @@
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     background-color: #2C2F33;
     color: white;
@@ -7,7 +13,8 @@ body {
     font-family: 'Whitney Medium';
 }
 
-p {
+p,
+span {
     font-size: 1.6rem;
 }
 
@@ -17,14 +24,13 @@ p {
 
 #mainhero {
     top: 50px;
-    overflow: auto;
     padding-bottom: 100px;
 }
 
 #mainherotext {
     display: inline-block;
     width: 50%;
-    padding-top: 125px;
+    padding-top: 8%;
     vertical-align: text-top;
     text-align: center;
 }
@@ -54,6 +60,19 @@ p {
     float: right;
 }
 
+#subtitle {
+    text-align: center;
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 8%;
+}
+
+.infosection {
+    padding-left: 12%;
+    padding-right: 12%;
+    padding-top: 8%;
+}
+
 @font-face {
     font-family: 'Whitney Medium';
     src: url('../font/WhitneyMedium.ttf') format('truetype'), url('../font/WhitneyMedium.woff') format('woff');
@@ -64,4 +83,27 @@ p {
 @font-face {
     font-family: 'Whitney Black';
     src: url('../font/whitney_black-webfont.ttf') format('truetype');
+}
+
+
+/* iTyped Cursor */
+
+.ityped-cursor {
+    font-size: 2.2rem;
+    opacity: 1;
+    animation: blink 0.8s step-start 0s infinite;
+    -webkit-animation: blink 0.8s step-start 0s infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
 }
