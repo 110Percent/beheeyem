@@ -79,14 +79,14 @@ li {
 
 @font-face {
     font-family: 'Whitney Medium';
-    src: url('/beheeyem/include/font/WhitneyMedium.ttf') format('truetype'), url('../font/WhitneyMedium.woff') format('woff');
+    src: url('/include/font/WhitneyMedium.ttf') format('truetype'), url('../font/WhitneyMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Whitney Black';
-    src: url('/beheeyem/include/font/whitney_black-webfont.ttf') format('truetype');
+    src: url('/include/font/whitney_black-webfont.ttf') format('truetype');
 }
 
 
