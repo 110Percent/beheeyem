@@ -13,8 +13,14 @@ body {
     font-family: 'Whitney Medium';
 }
 
+a {
+    color: #7289DA;
+    text-decoration: none;
+}
+
 p,
-span {
+span,
+li {
     font-size: 1.6rem;
 }
 
@@ -62,8 +68,6 @@ span {
 
 #subtitle {
     text-align: center;
-    padding-left: 30%;
-    padding-right: 30%;
     padding-top: 8%;
 }
 
@@ -75,14 +79,14 @@ span {
 
 @font-face {
     font-family: 'Whitney Medium';
-    src: url('../font/WhitneyMedium.ttf') format('truetype'), url('../font/WhitneyMedium.woff') format('woff');
+    src: url('/beheeyem/include/font/WhitneyMedium.ttf') format('truetype'), url('../font/WhitneyMedium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Whitney Black';
-    src: url('../font/whitney_black-webfont.ttf') format('truetype');
+    src: url('/beheeyem/include/font/whitney_black-webfont.ttf') format('truetype');
 }
 
 

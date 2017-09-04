@@ -45,7 +45,7 @@ httpGetAsync('https://cdn.rawgit.com/sindresorhus/pokemon/master/data/en.json', 
     }
     setTimeout(function() {
         ityped.init('#pokeNames', config);
-    }, 3000);
+    }, 1750);
 
 });
 
