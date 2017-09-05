@@ -47,7 +47,11 @@ exports.action = (msg, args) => {
                     value: '`b.user-info <mention>`\nDisplays informaton on a user.',
                     inline: true
                 }
-            ]
+            ],
+            footer: {
+                text: 'Need more help? Check out the support server.',
+                icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+            }
         }
     })
 }
