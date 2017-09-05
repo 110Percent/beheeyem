@@ -1,5 +1,5 @@
 exports.action = (msg, args) => {
-    msg.channel.sendMessage("", {
+    msg.channel.send("", {
         embed: {
             color: 35071,
             fields: [{

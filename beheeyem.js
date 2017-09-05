@@ -58,19 +58,25 @@ beheeyem.on("message", msg => {
             if (commands[cmd]) {
                 commands[cmd].action(msg, args, beheeyem);
             } else if (cmd == "obtain") {
-                msg.channel.sendMessage("Honestly, just use Bulbapedia. The encounter data on the web is so inconsistent and undreadable that there's no way I could create an obtainability command. Sorry about that. 🙁");
+                msg.channel.send("Honestly, just use Bulbapedia. The encounter data on the web is so inconsistent and undreadable that there's no way I could create an obtainability command. Sorry about that. 🙁");
             } else if (cmd == "deathbird") {
-                msg.channel.sendFile("https://i.imgur.com/pIxQQXA.png", "DEATHBIRD.png");
+                msg.channel.send('', {
+                    file: "https://i.imgur.com/pIxQQXA.png",
+                    name: "DEATHBIRD.png"
+                });
             } else if (cmd == "youtried") {
-                msg.channel.sendFile("https://i.imgur.com/bAxMdQ0.png", "Filename.jpeg.gif.webp.mp4.exe.bat.sh.app.png");
+                msg.channel.send('', {
+                    file: "https://i.imgur.com/bAxMdQ0.png",
+                    name: "Filename.jpeg.gif.webp.mp4.exe.bat.sh.app.png"
+                });
             } else if (msg.author.id == 120887602395086848) {
                 if (cmd == "addnonya") {
                     var nonyas = require("./data/nonyas.json");
                     nonyas.nonyas.push(args);
                     jsonfile.writeFileSync("./data/nonyas.json", nonyas);
-                    msg.channel.sendMessage("👌🏾 Sucessfully added Nonya!");
+                    msg.channel.send("👌🏾 Sucessfully added Nonya!");
                 } else if (cmd == 'eval') {
-                    msg.channel.sendMessage(eval(args));
+                    msg.channel.send(eval(args));
                 }
             }
         }
@@ -110,7 +116,9 @@ function checkItalics(msg) {
         pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
         request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
             if (response.statusCode == 200) {
-                msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
+                msg.channel.send('', {
+                    file: "http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif"
+                });
                 isFound = true;
             }
         });
@@ -124,7 +132,9 @@ function checkItalics(msg) {
             request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
                 if (response.statusCode == 200) {
                     isFound == true;
-                    msg.channel.sendFile("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif");
+                    msg.channel.send({
+                        file: "http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif"
+                    });
                 }
             });
             if (isFound) break;
