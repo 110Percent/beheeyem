@@ -151,11 +151,11 @@ exports.action = (msg, args) => {
             }
         };
 
-        msg.channel.sendMessage("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
+        msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
             embed: dexEmbed
         });
     } else {
-        msg.channel.sendMessage("⚠ Dex entry not found! Maybe you misspelt the Pokémon's name?");
+        msg.channel.send("⚠ Dex entry not found! Maybe you misspelt the Pokémon's name?");
     }
 }
 

@@ -107,7 +107,7 @@ exports.action = (msg, args) => {
                 text: "#" + move.num
             }
         };
-        msg.channel.sendMessage("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(move.name) + "**", { embed: embedObject });
+        msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(move.name) + "**", { embed: embedObject });
         console.log(embedObject);
     }
 }

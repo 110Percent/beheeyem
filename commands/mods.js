@@ -41,6 +41,6 @@ exports.action = (msg, args) => {
                 value: modsObject.dnd.map(c => msg.guild.members.get(c).user.username + "#" + msg.guild.members.get(c).user.discriminator).join("\n")
             });
         }
-        msg.channel.sendMessage("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**Moderators**", { embed: embedObject });
+        msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**Moderators**", { embed: embedObject });
     } catch (err) {}
 }

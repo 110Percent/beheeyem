@@ -222,7 +222,7 @@ exports.action = (msg, args) => {
         atkVulnDisplay[3] = "Doesn't affect: " + atkNoTypes.join(", ");
     }
     console.log(atkVulnRaw);
-    msg.channel.sendMessage("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
+    msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
         embed: {
             color: 35071,
             fields: [{
