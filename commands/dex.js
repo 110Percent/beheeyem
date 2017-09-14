@@ -1,6 +1,11 @@
-const dex = require("../data/pokedex.js").BattlePokedex;
+const request = require('request');
+const requireFromUrl = require('require-from-url/sync');
+let dex;
+let aliases;
+let match;
 const dexEntries = require("../data/flavorText.json");
 const abilities = require("../data/abilities.js").BattleAbilities;
+const Matcher = require('did-you-mean');
 
 var embedColours = {
     Red: 16724530,
@@ -15,9 +20,29 @@ var embedColours = {
     Pink: 16737701
 };
 
-
+request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/pokedex.js', (err, res, body) => {
+    if (!err && res.statusCode == 200) {
+        dex = requireFromUrl('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/pokedex.js').BattlePokedex;
+    } else {
+        console.log('Error fetching Showdown dex; Switching to local dex...');
+        dex = require('../data/pokedex.js').BattlePokedex;
+    }
+    match = new Matcher(Object.keys(dex).join(' '));
+});
+request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/aliases.js', (err, res, body) => {
+    if (!err && res.statusCode == 200) {
+        aliases = requireFromUrl('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/aliases.js').BattleAliases;
+    } else {
+        console.log('Error fetching Showdown aliases; Switching to local aliases...');
+        aliases = require('../data/aliases.js').BattleAliases;
+    }
+});
 exports.action = (msg, args) => {
     var poke = args.toLowerCase();
+    if (aliases[poke]) {
+        poke = aliases[poke];
+    }
+    poke = poke.toLowerCase();
     if (poke.split(" ")[0] == "mega") {
         poke = poke.substring(poke.split(" ")[0].length + 1) + "mega";
     }
@@ -155,7 +180,14 @@ exports.action = (msg, args) => {
             embed: dexEmbed
         });
     } else {
-        msg.channel.send("⚠ Dex entry not found! Maybe you misspelt the Pokémon's name?");
+        let dym = match.get(args);
+        let dymString;
+        if (dym == null) {
+            dymString = 'Maybe you misspelt the Pokémon\'s name?';
+        } else {
+            dymString = `Did you mean \`${dym}\`?`;
+        }
+        msg.channel.send("⚠ Dex entry not found! " + dymString);
     }
 }
 

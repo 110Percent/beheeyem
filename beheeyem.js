@@ -40,11 +40,11 @@ function loadCommands() {
         } catch (err) {
             if (err) {
                 errCount++;
-                console.log('Error in '.red + cmdName.yellow + '!'.red);
+                console.log('Error in '.red + cmdName.yellow + '!'.red + '\n' + err.stack);
             }
         }
     });
-    console.log('Loaded commands with '.cyan + (errCount > 0 ? errCount.red : 'no'.green) + ' errors!'.cyan);
+    console.log('Loaded commands with '.cyan + (errCount > 0 ? errCount.toString().red : 'no'.green) + ` error${errCount == 1? '' : 's'}!`.cyan);
     return commands;
 }
 

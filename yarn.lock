@@ -52,6 +52,10 @@ aws4@^1.2.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.5.0.tgz#0a29ffb79c31c9e712eeb087e8e7a64b4a56d755"
 
+axo@0.0.x:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/axo/-/axo-0.0.2.tgz#49355fbbeab38449bca696a1aacc469a5ee9fd47"
+
 balanced-match@^0.4.1:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
@@ -183,6 +187,13 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
 
+did-you-mean@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/did-you-mean/-/did-you-mean-0.0.1.tgz#8851ce82407903cb62c12cb6ad4f676921ccdec3"
+  dependencies:
+    levenshtein "*"
+    underscore "*"
+
 diff@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/diff/-/diff-2.2.3.tgz#60eafd0d28ee906e4e8ff0a52c1229521033bf99"
@@ -243,6 +254,10 @@ escape-string-regexp@^1.0.2:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
+eventemitter3@~2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-2.0.3.tgz#b5e1079b59fb5e1ba2771c0a993be060a58c99ba"
+
 exit@0.1.2, exit@0.1.x:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
@@ -251,6 +266,10 @@ extend@^3.0.0, extend@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.0.tgz#5a474353b9f3353ddd8176dfd37b91c83a46f1d4"
 
+extendible@0.1.x:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/extendible/-/extendible-0.1.1.tgz#e2a37ed87129fb4f9533e8a8d7506230a539c905"
+
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
@@ -258,6 +277,10 @@ extsprintf@1.0.2:
 eyes@0.1.x:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
+
+failure@1.1.x:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/failure/-/failure-1.1.1.tgz#a8e83d3b1602d2468bff6ad4d9071e0103b81a87"
 
 forever-agent@~0.6.1:
   version "0.6.1"
@@ -321,6 +344,10 @@ graceful-fs@^4.1.6:
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+
+hang@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/hang/-/hang-1.0.0.tgz#67050879844435e02ae0409c4f4553c6438e1d71"
 
 har-validator@~2.0.6:
   version "2.0.6"
@@ -456,6 +483,19 @@ jsprim@^1.2.2:
     extsprintf "1.0.2"
     json-schema "0.2.3"
     verror "1.3.6"
+
+levenshtein@*:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/levenshtein/-/levenshtein-1.0.5.tgz#3911737a9cb56da345d008f55782c6f138979ba3"
+
+loads@0.0.x:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/loads/-/loads-0.0.4.tgz#97f3016397e70ddff480b81ec638ceea22a0a99c"
+  dependencies:
+    failure "1.1.x"
+    one-time "0.0.x"
+    xhr-response "1.0.x"
+    xhr-status "1.0.x"
 
 lodash._basebind@~2.3.0:
   version "2.3.0"
@@ -623,6 +663,10 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
+node-http-xhr@~1.3.0:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/node-http-xhr/-/node-http-xhr-1.3.4.tgz#0dbf827c2858f40c57a79375fc4be07c8ff46f55"
+
 node-version-compare@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/node-version-compare/-/node-version-compare-1.0.1.tgz#d85bfd20f0acade33577f56682c7109c34c550cd"
@@ -649,6 +693,10 @@ once@^1.3.0:
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
   dependencies:
     wrappy "1"
+
+one-time@0.0.x:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/one-time/-/one-time-0.0.4.tgz#f8cdf77884826fe4dff93e3a9cc37b1e4480742e"
 
 pako:
   version "1.0.4"
@@ -729,6 +777,22 @@ request@^2.72.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
+
+requests@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/requests/-/requests-0.2.2.tgz#0e5ec07fd86b495bdb4beda869b2157eca893b4d"
+  dependencies:
+    axo "0.0.x"
+    eventemitter3 "~2.0.2"
+    extendible "0.1.x"
+    hang "1.0.x"
+    loads "0.0.x"
+    node-http-xhr "~1.3.0"
+    xhr-send "1.0.x"
+
+require-from-url@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/require-from-url/-/require-from-url-3.1.2.tgz#5ac1f612519fd124396d59c3e263ce6f27ccb66f"
 
 safe-buffer@~5.0.1:
   version "5.0.1"
@@ -837,7 +901,7 @@ ultron@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.0.tgz#b07a2e6a541a815fc6a34ccd4533baec307ca864"
 
-underscore@1.8.x:
+underscore@*, underscore@1.8.x:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
@@ -882,6 +946,18 @@ wtf_wikipedia:
   resolved "https://registry.yarnpkg.com/wtf_wikipedia/-/wtf_wikipedia-0.7.1.tgz#b60f0f841b8ab6d8fb67ffdacaf9b2b0b1bcac03"
   dependencies:
     superagent "^2.3.0"
+
+xhr-response@1.0.x:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/xhr-response/-/xhr-response-1.0.1.tgz#affe3a08544ba72186e4dc52cd0226671d8673fe"
+
+xhr-send@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/xhr-send/-/xhr-send-1.0.0.tgz#1a40c73e5db2028ee08fe90f5c3d6dc7f796a854"
+
+xhr-status@1.0.x:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/xhr-status/-/xhr-status-1.0.0.tgz#9a8d1ec3aef486f76729c1ead7ddb54562d8f08f"
 
 xtend@^4.0.0:
   version "4.0.1"
