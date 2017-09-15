@@ -1,73 +1,42 @@
 const typeMatchups = require("../data/typechart.js").BattleTypeChart;
 
 exports.action = (msg, args) => {
-    var defMulti = {
-        "Bug": 1,
-        "Dark": 1,
-        "Dragon": 1,
-        "Electric": 1,
-        "Fairy": 1,
-        "Fighting": 1,
-        "Fire": 1,
-        "Flying": 1,
-        "Ghost": 1,
-        "Grass": 1,
-        "Ground": 1,
-        "Ice": 1,
-        "Normal": 1,
-        "Poison": 1,
-        "Psychic": 1,
-        "Rock": 1,
-        "Steel": 1,
-        "Water": 1
+    let def = {
+        vulnCheck: false,
+        normalCheck: false,
+        resistCheck: false,
+        noCheck: false,
+        vulnTypes: [],
+        normalTypes: [],
+        resistTypes: [],
+        noTypes: [],
+        vulnDisplay: [],
+        vulnRaw: [],
+        normalRaw: [],
+        resistRaw: [],
+        noRaw: [],
+        multi: {
+            "Bug": 1,
+            "Dark": 1,
+            "Dragon": 1,
+            "Electric": 1,
+            "Fairy": 1,
+            "Fighting": 1,
+            "Fire": 1,
+            "Flying": 1,
+            "Ghost": 1,
+            "Grass": 1,
+            "Ground": 1,
+            "Ice": 1,
+            "Normal": 1,
+            "Poison": 1,
+            "Psychic": 1,
+            "Rock": 1,
+            "Steel": 1,
+            "Water": 1
+        }
     };
-    var atkMulti = {
-        "Bug": 1,
-        "Dark": 1,
-        "Dragon": 1,
-        "Electric": 1,
-        "Fairy": 1,
-        "Fighting": 1,
-        "Fire": 1,
-        "Flying": 1,
-        "Ghost": 1,
-        "Grass": 1,
-        "Ground": 1,
-        "Ice": 1,
-        "Normal": 1,
-        "Poison": 1,
-        "Psychic": 1,
-        "Rock": 1,
-        "Steel": 1,
-        "Water": 1
-    };
-    var vulnCheck = false;
-    var normalCheck = false;
-    var resistCheck = false;
-    var noCheck = false;
-    var vulnTypes = [];
-    var normalTypes = [];
-    var resistTypes = [];
-    var noTypes = [];
-    var vulnDisplay = [];
-    var vulnRaw = [];
-    var normalRaw = [];
-    var resistRaw = [];
-    var noRaw = [];
-    var atkVulnCheck = false;
-    var atkNormalCheck = false;
-    var atkResistCheck = false;
-    var atkNoCheck = false;
-    var atkVulnTypes = [];
-    var atkNormalTypes = [];
-    var atkResistTypes = [];
-    var atkNoTypes = [];
-    var atkVulnRaw = [];
-    var atkNormalRaw = [];
-    var atkResistRaw = [];
-    var atkNoRaw = [];
-    var vulnDisplay = [];
-    var atkVulnDisplay = [];
+    let atk = JSON.parse(JSON.stringify(def));
     var displayTypes = [];
     for (var z = 0; z < args.split(" ").length; z++) {
         var argsSplit = args.split(" ")[z];
@@ -76,162 +45,162 @@ exports.action = (msg, args) => {
             displayTypes.push(toType);
             var dTaken = typeMatchups[toType].damageTaken;
             for (toMatch in dTaken) {
-                if (defMulti[toMatch]) {
+                if (def.multi[toMatch]) {
                     if (dTaken[toMatch] == 1) {
-                        defMulti[toMatch] *= 2;
+                        def.multi[toMatch] *= 2;
                     } else if (dTaken[toMatch] == 2) {
-                        defMulti[toMatch] *= 0.5;
+                        def.multi[toMatch] *= 0.5;
                     } else if (dTaken[toMatch] == 3) {
-                        defMulti[toMatch] = 0;
+                        def.multi[toMatch] = 0;
                     }
                 }
             }
             for (toMatch in typeMatchups) {
-                if (atkMulti[toMatch]) {
+                if (atk.multi[toMatch]) {
                     if (typeMatchups[toMatch].damageTaken[toType] == 1) {
-                        atkMulti[toMatch] *= 2;
+                        atk.multi[toMatch] *= 2;
                     } else if (typeMatchups[toMatch].damageTaken[toType] == 2) {
-                        atkMulti[toMatch] *= 0.5;
+                        atk.multi[toMatch] *= 0.5;
                     } else if (typeMatchups[toMatch].damageTaken[toType] == 3) {
-                        atkMulti[toMatch] *= 0;
+                        atk.multi[toMatch] *= 0;
                     }
                 }
             }
-            for (var i = 0; i < Object.keys(defMulti).length; i++) {
-                if (defMulti[Object.keys(defMulti)[i]] > 1) {
-                    vulnCheck = true;
+            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+                if (def.multi[Object.keys(def.multi)[i]] > 1) {
+                    def.vulnCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(defMulti).length; i++) {
-                if (defMulti[Object.keys(defMulti)[i]] == 1) {
-                    normalCheck = true;
+            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+                if (def.multi[Object.keys(def.multi)[i]] == 1) {
+                    def.normalCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(defMulti).length; i++) {
-                if (defMulti[Object.keys(defMulti)[i]] > 0 && defMulti[Object.keys(defMulti)[i]] < 1) {
-                    resistCheck = true;
+            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+                if (def.multi[Object.keys(def.multi)[i]] > 0 && def.multi[Object.keys(def.multi)[i]] < 1) {
+                    def.resistCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(defMulti).length; i++) {
-                if (defMulti[Object.keys(defMulti)[i]] == 0) {
-                    noCheck = true;
+            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+                if (def.multi[Object.keys(def.multi)[i]] == 0) {
+                    def.noCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-                if (atkMulti[Object.keys(atkMulti)[i]] > 1) {
-                    atkVulnCheck = true;
+            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+                if (atk.multi[Object.keys(atk.multi)[i]] > 1) {
+                    atk.vulnCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-                if (atkMulti[Object.keys(atkMulti)[i]] == 1) {
-                    atkNormalCheck = true;
+            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+                if (atk.multi[Object.keys(atk.multi)[i]] == 1) {
+                    atk.normalCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-                if (atkMulti[Object.keys(atkMulti)[i]] > 0 && atkMulti[Object.keys(atkMulti)[i]] < 1) {
-                    atkResistCheck = true;
+            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+                if (atk.multi[Object.keys(atk.multi)[i]] > 0 && atk.multi[Object.keys(atk.multi)[i]] < 1) {
+                    atk.resistCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-                if (atkMulti[Object.keys(atkMulti)[i]] == 0) {
-                    atkNoCheck = true;
+            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+                if (atk.multi[Object.keys(atk.multi)[i]] == 0) {
+                    atk.noCheck = true;
                     break;
                 }
             }
         }
 
     }
-    if (vulnCheck) {
-        for (var i = 0; i < Object.keys(defMulti).length; i++) {
-            if (defMulti[Object.keys(defMulti)[i]] > 1 && vulnRaw.indexOf(Object.keys(defMulti)[i]) == -1) {
-                vulnTypes.push(Object.keys(defMulti)[i] + " (x" + defMulti[Object.keys(defMulti)[i]] + ")");
-                vulnRaw.push(Object.keys(defMulti)[i]);
+    if (def.vulnCheck) {
+        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            if (def.multi[Object.keys(def.multi)[i]] > 1 && def.vulnRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
+                def.vulnTypes.push(Object.keys(def.multi)[i] + " (x" + def.multi[Object.keys(def.multi)[i]] + ")");
+                def.vulnRaw.push(Object.keys(def.multi)[i]);
             }
         }
-        vulnDisplay[0] = "Vulnerable to: " + vulnTypes.join(", ");
+        def.vulnDisplay[0] = "Vulnerable to: " + def.vulnTypes.join(", ");
     }
-    if (normalCheck) {
-        for (var i = 0; i < Object.keys(defMulti).length; i++) {
-            if (defMulti[Object.keys(defMulti)[i]] == 1 && normalRaw.indexOf(Object.keys(defMulti)[i]) == -1) {
-                normalTypes.push(Object.keys(defMulti)[i]);
-                normalRaw.push(Object.keys(defMulti)[i]);
+    if (def.normalCheck) {
+        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            if (def.multi[Object.keys(def.multi)[i]] == 1 && def.normalRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
+                def.normalTypes.push(Object.keys(def.multi)[i]);
+                def.normalRaw.push(Object.keys(def.multi)[i]);
             }
         }
-        vulnDisplay[1] = "Takes normal damage from: " + normalTypes.join(", ");
+        def.vulnDisplay[1] = "Takes normal damage from: " + def.normalTypes.join(", ");
     }
-    if (resistCheck) {
-        for (var i = 0; i < Object.keys(defMulti).length; i++) {
-            if (defMulti[Object.keys(defMulti)[i]] > 0 && defMulti[Object.keys(defMulti)[i]] < 1 && resistRaw.indexOf(Object.keys(defMulti)[i]) == -1) {
-                resistTypes.push(Object.keys(defMulti)[i] + " (x" + defMulti[Object.keys(defMulti)[i]] + ")");
-                resistRaw.push(Object.keys(defMulti)[i]);
+    if (def.resistCheck) {
+        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            if (def.multi[Object.keys(def.multi)[i]] > 0 && def.multi[Object.keys(def.multi)[i]] < 1 && def.resistRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
+                def.resistTypes.push(Object.keys(def.multi)[i] + " (x" + def.multi[Object.keys(def.multi)[i]] + ")");
+                def.resistRaw.push(Object.keys(def.multi)[i]);
             }
         }
-        vulnDisplay[2] = "Resists: " + resistTypes.join(", ");
+        def.vulnDisplay[2] = "Resists: " + def.resistTypes.join(", ");
     }
-    if (noCheck) {
-        for (var i = 0; i < Object.keys(defMulti).length; i++) {
-            if (defMulti[Object.keys(defMulti)[i]] == 0 && noRaw.indexOf(Object.keys(defMulti)[i]) == -1) {
-                noTypes.push(Object.keys(defMulti)[i]);
-                noRaw.push(Object.keys(defMulti)[i]);
+    if (def.noCheck) {
+        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            if (def.multi[Object.keys(def.multi)[i]] == 0 && def.noRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
+                def.noTypes.push(Object.keys(def.multi)[i]);
+                def.noRaw.push(Object.keys(def.multi)[i]);
             }
         }
-        vulnDisplay[3] = "Not affected by: " + noTypes.join(", ");
+        def.vulnDisplay[3] = "Not affected by: " + def.noTypes.join(", ");
     }
 
-    if (atkVulnCheck) {
-        for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-            if (atkMulti[Object.keys(atkMulti)[i]] > 1 && atkVulnRaw.indexOf(Object.keys(atkMulti)[i]) == -1) {
-                atkVulnTypes.push(Object.keys(atkMulti)[i] + " (x" + atkMulti[Object.keys(atkMulti)[i]] + ")");
-                atkVulnRaw.push(Object.keys(atkMulti)[i]);
+    if (atk.vulnCheck) {
+        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            if (atk.multi[Object.keys(atk.multi)[i]] > 1 && atk.vulnRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
+                atk.vulnTypes.push(Object.keys(atk.multi)[i] + " (x" + atk.multi[Object.keys(atk.multi)[i]] + ")");
+                atk.vulnRaw.push(Object.keys(atk.multi)[i]);
             }
         }
-        atkVulnDisplay[0] = "Supereffective against: " + atkVulnTypes.join(", ");
+        atk.vulnDisplay[0] = "Supereffective against: " + atk.vulnTypes.join(", ");
     }
-    if (atkNormalCheck) {
-        for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-            if (atkMulti[Object.keys(atkMulti)[i]] == 1 && atkNormalRaw.indexOf(Object.keys(atkMulti)[i]) == -1) {
-                atkNormalTypes.push(Object.keys(atkMulti)[i]);
-                atkNormalRaw.push(Object.keys(atkMulti)[i]);
+    if (atk.normalCheck) {
+        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            if (atk.multi[Object.keys(atk.multi)[i]] == 1 && atk.normalRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
+                atk.normalTypes.push(Object.keys(atk.multi)[i]);
+                atk.normalRaw.push(Object.keys(atk.multi)[i]);
             }
         }
-        atkVulnDisplay[1] = "Deals normal damage to: " + atkNormalTypes.join(", ");
+        atk.vulnDisplay[1] = "Deals normal damage to: " + atk.normalTypes.join(", ");
     }
-    if (atkResistCheck) {
-        for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-            if (atkMulti[Object.keys(atkMulti)[i]] > 0 && atkMulti[Object.keys(atkMulti)[i]] < 1 && atkResistRaw.indexOf(Object.keys(atkMulti)[i]) == -1) {
-                atkResistTypes.push(Object.keys(atkMulti)[i] + " (x" + atkMulti[Object.keys(atkMulti)[i]] + ")");
-                atkResistRaw.push(Object.keys(atkMulti)[i]);
+    if (atk.resistCheck) {
+        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            if (atk.multi[Object.keys(atk.multi)[i]] > 0 && atk.multi[Object.keys(atk.multi)[i]] < 1 && atk.resistRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
+                atk.resistTypes.push(Object.keys(atk.multi)[i] + " (x" + atk.multi[Object.keys(atk.multi)[i]] + ")");
+                atk.resistRaw.push(Object.keys(atk.multi)[i]);
             }
         }
-        atkVulnDisplay[2] = "Not very effective against: " + atkResistTypes.join(", ");
+        atk.vulnDisplay[2] = "Not very effective against: " + atk.resistTypes.join(", ");
     }
-    if (atkNoCheck) {
-        for (var i = 0; i < Object.keys(atkMulti).length; i++) {
-            if (atkMulti[Object.keys(atkMulti)[i]] == 0 && atkNoRaw.indexOf(Object.keys(atkMulti)[i]) == -1) {
-                atkNoTypes.push(Object.keys(atkMulti)[i]);
-                atkNoRaw.push(Object.keys(atkMulti)[i]);
+    if (atk.noCheck) {
+        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            if (atk.multi[Object.keys(atk.multi)[i]] == 0 && atk.noRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
+                atk.noTypes.push(Object.keys(atk.multi)[i]);
+                atk.noRaw.push(Object.keys(atk.multi)[i]);
             }
         }
-        atkVulnDisplay[3] = "Doesn't affect: " + atkNoTypes.join(", ");
+        atk.vulnDisplay[3] = "Doesn't affect: " + atk.noTypes.join(", ");
     }
-    console.log(atkVulnRaw);
+    console.log(atk.vulnRaw);
     msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
         embed: {
             color: 35071,
             fields: [{
                     name: "Offense",
-                    value: atkVulnDisplay.join("\n\n")
+                    value: atk.vulnDisplay.join("\n\n")
                 },
                 {
                     name: "Defense",
-                    value: vulnDisplay.join("\n\n")
+                    value: def.vulnDisplay.join("\n\n")
                 }
             ]
         }
