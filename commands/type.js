@@ -190,7 +190,6 @@ exports.action = (msg, args) => {
         }
         atk.vulnDisplay[3] = "Doesn't affect: " + atk.noTypes.join(", ");
     }
-    console.log(atk.vulnRaw);
     msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
         embed: {
             color: 35071,

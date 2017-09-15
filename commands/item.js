@@ -64,7 +64,6 @@ exports.action = (msg, args) => {
                 }
             }
         });
-        console.log("https://raw.githubusercontent.com/110Percent/beheeyem-data/master/sprites/items/" + item.name.toLowerCase().replace(" ", "-").replace("'", "") + ".png");
     } else {
         let dym = match.get(args);
         let dymString;
