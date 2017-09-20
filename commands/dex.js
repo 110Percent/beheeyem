@@ -112,13 +112,13 @@ exports.action = (msg, args) => {
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
         for (var i = 0; i < dexEntries.length; i++) {
-            if (dexEntries[i].version_id == 25 && dexEntries[i].species_id == pokeEntry.num && dexEntries[i].language_id == 9) {
+            if (dexEntries[i].version_id > 26 && dexEntries[i].species_id == pokeEntry.num && dexEntries[i].language_id == 9) {
                 var pokedexEntry = "*" + dexEntries[i].flavor_text + "*";
                 break;
             }
         }
         if (!pokedexEntry) {
-            var pokedexEntry = "*This Pokémon was not featured in Pokémon Omega Ruby.*";
+            var pokedexEntry = "*An unknown error occurred.*";
         }
 
         var dexEmbed = {
@@ -157,7 +157,7 @@ exports.action = (msg, args) => {
                     value: pokeEntry.eggGroups.join(", ")
                 },
                 {
-                    name: "Dex Entry (OR)",
+                    name: "Dex Entry (Sun/Moon)",
                     value: pokedexEntry
                 },
                 {
