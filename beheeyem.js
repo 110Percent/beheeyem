@@ -109,15 +109,22 @@ function capitalizeFirstLetter(string) {
 }
 
 function checkItalics(msg) {
+    let isShiny = false;
     var isFound = false;
+    let urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/';
     var asteriskSplit = msg.content.split("*");
     for (var i = 1; i < asteriskSplit.length - 1; i++) {
         var pokeName = asteriskSplit[i].toLowerCase();
+        if (pokeName.indexOf('shiny') != -1) {
+            isShiny = true;
+            pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
+        }
         pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
-        request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
+        if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
+        request(urlBuild + pokeName + ".gif", (err, response) => {
             if (response.statusCode == 200) {
                 msg.channel.send('', {
-                    file: "http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif"
+                    file: urlBuild + pokeName + ".gif"
                 });
                 isFound = true;
             }
@@ -128,12 +135,17 @@ function checkItalics(msg) {
         var underSplit = msg.content.split("_");
         for (var i = 1; i < underSplit.length - 1; i++) {
             var pokeName = underSplit[i].toLowerCase();
+            if (pokeName.indexOf('shiny') != -1) {
+                isShiny = true;
+                pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('shiny', '');
+            }
             pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
-            request("http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif", (err, response) => {
+            if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
+            request(urlBuild + pokeName + ".gif", (err, response) => {
                 if (response.statusCode == 200) {
                     isFound == true;
                     msg.channel.send({
-                        file: "http://smogon.com/dex/media/sprites/xy/" + pokeName + ".gif"
+                        file: urlBuild + pokeName + ".gif"
                     });
                 }
             });
