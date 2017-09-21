@@ -137,7 +137,7 @@ function checkItalics(msg) {
             var pokeName = underSplit[i].toLowerCase();
             if (pokeName.indexOf('shiny') != -1) {
                 isShiny = true;
-                pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('shiny', '');
+                pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
             }
             pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
             if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
