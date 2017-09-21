@@ -111,8 +111,8 @@ exports.action = (msg, args) => {
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
-        for (var i = 0; i < dexEntries.length; i++) {
-            if (dexEntries[i].version_id > 26 && dexEntries[i].species_id == pokeEntry.num && dexEntries[i].language_id == 9) {
+        for (var i = dexEntries.length - 1; i > -1; i--) {
+            if (dexEntries[i].species_id == pokeEntry.num && dexEntries[i].language_id == 9) {
                 var pokedexEntry = "*" + dexEntries[i].flavor_text + "*";
                 break;
             }
@@ -167,7 +167,7 @@ exports.action = (msg, args) => {
             ],
             thumbnail: {
 
-                url: "http://smogon.com/dex/media/sprites/xy/" + poke.toLowerCase().replace(" ", "_") + ".gif"
+                url: 'https://play.pokemonshowdown.com/sprites/xyani/' + poke.toLowerCase().replace(" ", "_") + ".gif"
                     //url: "https://raw.githubusercontent.com/fanzeyi/Pokemon-DB/master/thm/" + imagefetch
             },
             footer: {
