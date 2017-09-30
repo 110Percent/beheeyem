@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "colors": "^1.1.2",
     "convert-units": "^2.2.0",
     "csvjson": "^2.2.2",
