@@ -1,11 +1,11 @@
-const request = require('request');
-const requireFromUrl = require('require-from-url/sync');
-let dex;
-let aliases;
-let match;
-const dexEntries = require("../data/flavorText.json");
-const abilities = require("../data/abilities.js").BattleAbilities;
-const Matcher = require('did-you-mean');
+const request = require('request'),
+    requireFromUrl = require('require-from-url/sync'),
+    dexEntries = require("../data/flavorText.json"),
+    abilities = require("../data/abilities.js").BattleAbilities,
+    Matcher = require('did-you-mean');
+let dex,
+    aliases,
+    match;
 
 var embedColours = {
     Red: 16724530,

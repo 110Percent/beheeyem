@@ -1,13 +1,12 @@
-const Discord = require("discord.js");
-const beheeyem = new Discord.Client();
-const fs = require("fs");
-const jsonfile = require("jsonfile");
-const path = require("path");
-const request = require("request");
-const colors = require('colors');
-var config = require('./config.js');
-
-var imageCheck;
+const Discord = require("discord.js"),
+    beheeyem = new Discord.Client(),
+    fs = require("fs"),
+    jsonfile = require("jsonfile"),
+    path = require("path"),
+    request = require("request"),
+    colors = require('colors');
+var config = require('./config.js'),
+    imageCheck;
 
 console.log("Starting Beheeyem...");
 

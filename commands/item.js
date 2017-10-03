@@ -1,8 +1,8 @@
-const request = require('request');
-const requireFromUrl = require('require-from-url/sync');
-let items;
-const Matcher = require('did-you-mean');
-let aliases;
+const request = require('request'),
+    requireFromUrl = require('require-from-url/sync'),
+    Matcher = require('did-you-mean');
+let items,
+    aliases;
 
 
 request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/items.js', (err, res, body) => {
