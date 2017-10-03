@@ -1,7 +1,7 @@
-const request = require('request');
-const requireFromUrl = require('require-from-url/sync');
+const request = require('request'),
+    requireFromUrl = require('require-from-url/sync'),
+    Matcher = require('did-you-mean');
 let abilities;
-const Matcher = require('did-you-mean');
 
 request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/abilities.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {

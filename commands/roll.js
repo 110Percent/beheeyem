@@ -1,6 +1,6 @@
 exports.action = (msg, args) => {
-    var rnd = null;
-    var dice = [];
+    var rnd = null,
+        dice = [];
     if (args) {
         if (args.indexOf("d") == -1) {
             if (args == Number(args)) {
