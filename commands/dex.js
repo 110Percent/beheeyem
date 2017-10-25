@@ -2,7 +2,10 @@ const request = require('request'),
     requireFromUrl = require('require-from-url/sync'),
     dexEntries = require("../data/flavorText.json"),
     abilities = require("../data/abilities.js").BattleAbilities,
-    Matcher = require('did-you-mean');
+    Matcher = require('did-you-mean'),
+    url = require('url'),
+    http = require('https'),
+    sizeOf = require('image-size');
 let dex,
     aliases,
     match;
@@ -39,6 +42,7 @@ request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/aliases.js'
 });
 exports.action = (msg, args) => {
     var poke = args.toLowerCase();
+
     if (aliases[poke]) {
         poke = aliases[poke];
     }
@@ -65,9 +69,11 @@ exports.action = (msg, args) => {
         }
     }
     if (pokeEntry) {
+        let imgDimensions = {};
+
         poke = pokeEntry.species;
-        var evoLine = "**" + capitalizeFirstLetter(poke) + "**";
-        var preEvos = "";
+        var evoLine = "**" + capitalizeFirstLetter(poke) + "**",
+            preEvos = "";
         if (pokeEntry.prevo) {
             preEvos = preEvos + capitalizeFirstLetter(pokeEntry.prevo) + " > ";
             var preEntry = dex[pokeEntry.prevo];
@@ -111,6 +117,8 @@ exports.action = (msg, args) => {
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
+        let imageURL = 'https://cdn.rawgit.com/110Percent/beheeyem-data/44795927/webp/' + poke.toLowerCase().replace(" ", "_") + ".webp";
+
         for (var i = dexEntries.length - 1; i > -1; i--) {
             if (dexEntries[i].species_id == pokeEntry.num && dexEntries[i].language_id == 9) {
                 var pokedexEntry = "*" + dexEntries[i].flavor_text + "*";
@@ -120,6 +128,8 @@ exports.action = (msg, args) => {
         if (!pokedexEntry) {
             var pokedexEntry = "*An unknown error occurred.*";
         }
+
+        console.log(imgDimensions);
 
         var dexEmbed = {
             color: embedColours[pokeEntry.color],
@@ -165,17 +175,17 @@ exports.action = (msg, args) => {
                     value: "[Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/" + capitalizeFirstLetter(poke).replace(" ", "_") + "_(Pokémon\\))  |  [Smogon](http://www.smogon.com/dex/sm/pokemon/" + poke.replace(" ", "_") + ")  |  [PokémonDB](http://pokemondb.net/pokedex/" + poke.replace(" ", "-") + ")"
                 }
             ],
-            thumbnail: {
+            image: {
+                url: imageURL,
 
-                url: 'https://play.pokemonshowdown.com/sprites/xyani/' + poke.toLowerCase().replace(" ", "_") + ".gif"
-                    //url: "https://raw.githubusercontent.com/fanzeyi/Pokemon-DB/master/thm/" + imagefetch
+                width: 80
             },
             footer: {
                 text: "#" + pokeEntry.num,
                 icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
             }
         };
-
+        console.log(dexEmbed)
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
             embed: dexEmbed
         });
