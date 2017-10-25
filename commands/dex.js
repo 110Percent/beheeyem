@@ -129,8 +129,6 @@ exports.action = (msg, args) => {
             var pokedexEntry = "*An unknown error occurred.*";
         }
 
-        console.log(imgDimensions);
-
         var dexEmbed = {
             color: embedColours[pokeEntry.color],
             fields: [{
@@ -185,7 +183,6 @@ exports.action = (msg, args) => {
                 icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
             }
         };
-        console.log(dexEmbed)
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
             embed: dexEmbed
         });
