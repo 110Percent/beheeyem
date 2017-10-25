@@ -184,8 +184,9 @@ exports.action = (msg, args) => {
             }
         };
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
-            embed: dexEmbed
-        });
+                embed: dexEmbed
+            })
+            .catch(console.error);
     } else {
         let dym = match.get(args);
         let dymString;
