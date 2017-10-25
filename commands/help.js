@@ -49,7 +49,7 @@ exports.action = (msg, args) => {
                 }
             ],
             footer: {
-                text: 'Need more help? Check out the support server.',
+                text: 'Need more help? Check out the support server. A link is present on Beheeyem\'s website.',
                 icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
             }
         }

@@ -6,6 +6,7 @@
     "csvjson": "^2.2.2",
     "did-you-mean": "^0.0.1",
     "discord.js": "^11.1.0",
+    "image-size": "^0.6.1",
     "jsonfile": "^2.4.0",
     "moment": "^2.18.1",
     "nodemw": "^0.10.1",
