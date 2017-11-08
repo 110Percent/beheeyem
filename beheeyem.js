@@ -75,7 +75,39 @@ beheeyem.on("message", msg => {
                     jsonfile.writeFileSync("./data/nonyas.json", nonyas);
                     msg.channel.send("👌🏾 Sucessfully added Nonya!");
                 } else if (cmd == 'eval') {
-                    msg.channel.send(eval(args));
+                    try {
+                        msg.channel.sendMessage("", {
+                            embed: {
+                                title: '🖥 JavaScript Eval',
+                                fields: [{
+                                        name: "Input",
+                                        value: args
+                                    },
+                                    {
+                                        name: "Output",
+                                        value: eval(args)
+                                    }
+                                ],
+                                color: 5561189
+                            }
+                        });
+                    } catch (err) {
+                        msg.channel.sendMessage("", {
+                            embed: {
+                                title: '⚠ Error',
+                                fields: [{
+                                        name: "Input",
+                                        value: args
+                                    },
+                                    {
+                                        name: "Error",
+                                        value: err.toString()
+                                    }
+                                ],
+                                color: 16724015
+                            }
+                        });
+                    }
                 }
             }
         }
