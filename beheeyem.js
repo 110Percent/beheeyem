@@ -144,40 +144,46 @@ function checkItalics(msg) {
     var isFound = false;
     let urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/';
     var asteriskSplit = msg.content.split("*");
+    var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) {
-        var pokeName = asteriskSplit[i].toLowerCase();
+        pokeName = asteriskSplit[i].toLowerCase();
         if (pokeName.indexOf('shiny') != -1) {
             isShiny = true;
             pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
         }
-        pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
+        pokeName = pokeName.replace(" ", "-");
         if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
-        request(urlBuild + pokeName + ".gif", (err, response) => {
-            if (response.statusCode == 200) {
-                msg.channel.send('', {
-                    file: urlBuild + pokeName + ".gif"
-                });
-                isFound = true;
+        request(urlBuild + pokeName + ".gif", (err, response) => {;
+            if (!err) {
+                if (response.statusCode == 200) {
+                    msg.channel.send('', {
+                        file: response.request.href
+                    });
+                    isFound = true;
+                }
             }
         });
         if (isFound) break;
     }
     if (!isFound) {
         var underSplit = msg.content.split("_");
+        var pokeName;
         for (var i = 1; i < underSplit.length - 1; i++) {
-            var pokeName = underSplit[i].toLowerCase();
+            pokeName = underSplit[i].toLowerCase();
             if (pokeName.indexOf('shiny') != -1) {
                 isShiny = true;
                 pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
             }
-            pokename = pokeName.replace(" ", "-").split("-").map(capitalizeFirstLetter).join("-");
+            pokeName = pokeName.replace(" ", "-");
             if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
             request(urlBuild + pokeName + ".gif", (err, response) => {
-                if (response.statusCode == 200) {
-                    isFound == true;
-                    msg.channel.send({
-                        file: urlBuild + pokeName + ".gif"
-                    });
+                if (!err) {
+                    if (response.statusCode == 200) {
+                        isFound == true;
+                        msg.channel.send({
+                            file: response.request.href
+                        });
+                    }
                 }
             });
             if (isFound) break;
