@@ -143,7 +143,7 @@ function checkItalics(msg) {
     let isShiny = false;
     var isFound = false;
     let urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/';
-    var asteriskSplit = msg.content.split("*");
+    var asteriskSplit = msg.content.replace('#', '').replace('?', '').split("*");
     var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) {
         pokeName = asteriskSplit[i].toLowerCase();
@@ -166,7 +166,7 @@ function checkItalics(msg) {
         if (isFound) break;
     }
     if (!isFound) {
-        var underSplit = msg.content.split("_");
+        var underSplit = msg.content.replace('#', '').replace('?', '').split("_");
         var pokeName;
         for (var i = 1; i < underSplit.length - 1; i++) {
             pokeName = underSplit[i].toLowerCase();
