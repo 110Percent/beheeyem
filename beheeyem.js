@@ -55,7 +55,11 @@ beheeyem.on("message", msg => {
             var args = commandstring.substring(cmd.length + 1);
 
             if (commands[cmd]) {
-                commands[cmd].action(msg, args, beheeyem);
+                try {
+                    commands[cmd].action(msg, args, beheeyem);
+                } catch (err) {
+                    console.error(err);
+                }
             } else if (cmd == "obtain") {
                 msg.channel.send("Honestly, just use Bulbapedia. The encounter data on the web is so inconsistent and undreadable that there's no way I could create an obtainability command. Sorry about that. 🙁");
             } else if (cmd == "deathbird") {
