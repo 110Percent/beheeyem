@@ -23,7 +23,7 @@ var embedColours = {
     Pink: 16737701
 };
 
-request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/pokedex.js', (err, res, body) => {
+request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/pokedex.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
         dex = requireFromUrl('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/pokedex.js').BattlePokedex;
     } else {

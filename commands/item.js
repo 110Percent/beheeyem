@@ -5,18 +5,18 @@ let items,
     aliases;
 
 
-request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/items.js', (err, res, body) => {
+request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/items.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
-        items = requireFromUrl('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/items.js').BattleItems;
+        items = requireFromUrl('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/items.js').BattleItems;
     } else {
         console.log('Error fetching Showdown items; Switching to local items...');
         items = require('../data/pokedex.js').BattleItems;
     }
     match = new Matcher(Object.keys(items).join(' '));
 });
-request('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/aliases.js', (err, res, body) => {
+request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/aliases.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
-        aliases = requireFromUrl('https://cdn.rawgit.com/Zarel/Pokemon-Showdown/2d605975/data/aliases.js').BattleAliases;
+        aliases = requireFromUrl('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/aliases.js').BattleAliases;
     } else {
         console.log('Error fetching Showdown aliases; Switching to local aliases...');
         aliases = require('../data/aliases.js').BattleAliases;
