@@ -16,8 +16,15 @@ beheeyem.on("ready", function() {
     console.log(("Beheeyem is active! Currently serving in " + String(beheeyem.guilds.size).white + " guilds.\n".green).bold);
     beheeyem.user.setGame("b.help");
     try {
-        request.post("https://bots.discord.pw/api/bots/" + beheeyem.user.id + "/stats", {
-            server_count: beheeyem.guilds.size
+        request({
+            headers: {
+                'Authorization': config.dbotsToken
+            },
+            uri: `https://bots.discord.pw/api/bots/${beheeyem.user.id}/stats`,
+            body: {
+                'server_count': beheeyem.guilds.size
+            },
+            method: 'POST'
         });
     } catch (err) {
         console.log("Could not update server count on Discord Bots website.".yellow);
@@ -125,13 +132,15 @@ beheeyem.login(config.token);
 
 beheeyem.on("guildCreate", (guild) => {
     try {
-        request.post({
-            url: "https://bots.discord.pw/api/bots/" + beheeyem.user.id + "/stats",
+        request({
             headers: {
-                authorization: config.dbotsToken
-            }
-        }, {
-            server_count: beheeyem.guilds.size
+                'Authorization': config.dbotsToken
+            },
+            uri: `https://bots.discord.pw/api/bots/${beheeyem.user.id}/stats`,
+            body: {
+                'server_count': beheeyem.guilds.size
+            },
+            method: 'POST'
         });
     } catch (err) {
         console.log("Could not update server count on Discord Bots website.".yellow);
