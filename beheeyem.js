@@ -21,13 +21,13 @@ beheeyem.on("ready", function() {
                 'Authorization': config.dbotsToken
             },
             uri: `https://bots.discord.pw/api/bots/${beheeyem.user.id}/stats`,
-            body: {
+            body: JSON.stringify({
                 'server_count': beheeyem.guilds.size
-            },
+            }),
             method: 'POST'
         });
     } catch (err) {
-        console.log("Could not update server count on Discord Bots website.".yellow);
+        console.log("Could not update server count on Discord Bots website.".yellow + `\n${err}`);
     }
 
 
@@ -137,9 +137,9 @@ beheeyem.on("guildCreate", (guild) => {
                 'Authorization': config.dbotsToken
             },
             uri: `https://bots.discord.pw/api/bots/${beheeyem.user.id}/stats`,
-            body: {
+            body: JSON.stringify({
                 'server_count': beheeyem.guilds.size
-            },
+            }),
             method: 'POST'
         });
     } catch (err) {
