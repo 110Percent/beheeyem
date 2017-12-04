@@ -1,4 +1,6 @@
-const moves = require("../data/moves.js").BattleMovedex;
+const moves = require("../data/moves.js").BattleMovedex,
+    footers = require('../data/footers.js');
+let tFooter;
 
 exports.action = (msg, args) => {
     var moveName = args.toLowerCase();
@@ -51,6 +53,12 @@ exports.action = (msg, args) => {
         } else {
             crystalString = "None";
         }
+        tFooter = Math.floor(Math.random() * 15) == 0 ? {
+            text: footers[Math.floor(Math.random() * footers.length)],
+            icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+        } : {
+            text: "#" + move.num
+        };
         var embedObject = {
             color: 35071,
             fields: [{
@@ -103,9 +111,7 @@ exports.action = (msg, args) => {
                     inline: true
                 }
             ],
-            footer: {
-                text: "#" + move.num
-            }
+            footer: tFooter
         };
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(move.name) + "**", { embed: embedObject });
         console.log(embedObject);

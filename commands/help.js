@@ -1,4 +1,11 @@
+const footers = require('../data/footers.js');
+let tFooter;
+
 exports.action = (msg, args) => {
+    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        text: footers[Math.floor(Math.random() * footers.length)],
+        icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+    } : null;
     msg.channel.send("", {
         embed: {
             color: 35071,
@@ -48,10 +55,7 @@ exports.action = (msg, args) => {
                     inline: true
                 }
             ],
-            footer: {
-                text: 'Need more help? Check out the support server. A link is present on Beheeyem\'s website.',
-                icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
-            }
+            footer: tFooter
         }
     })
 }
