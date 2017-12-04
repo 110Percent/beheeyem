@@ -157,7 +157,6 @@ function checkItalics(msg) {
     var isFound = false;
     let urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/';
     var asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*");
-    console.log(asteriskSplit);
     var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) {
         pokeName = asteriskSplit[i].toLowerCase();

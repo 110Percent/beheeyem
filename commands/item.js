@@ -1,8 +1,10 @@
 const request = require('request'),
     requireFromUrl = require('require-from-url/sync'),
-    Matcher = require('did-you-mean');
+    Matcher = require('did-you-mean'),
+    footers = require('../data/footers.js');
 let items,
-    aliases;
+    aliases,
+    tFooter;
 
 
 request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/items.js', (err, res, body) => {
@@ -35,6 +37,13 @@ exports.action = (msg, args) => {
             break;
         }
     }
+    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        text: footers[Math.floor(Math.random() * footers.length)],
+        icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+    } : {
+        text: capitalizeFirstLetter(item.name),
+        icon_url: "https://raw.githubusercontent.com/110Percent/beheeyem-data/master/sprites/items/" + item.name.toLowerCase().replace(" ", "-") + ".png"
+    };
     if (item) {
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(item.name) + "**", {
             embed: {
@@ -58,10 +67,7 @@ exports.action = (msg, args) => {
                         value: "[Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/" + capitalizeFirstLetter(item.name.replace(" ", "_").replace("'", "")) + ")  |  [Smogon](http://www.smogon.com/dex/sm/items/" + item.name.toLowerCase().replace(" ", "_").replace("'", "") + ")  |  [PokémonDB](http://pokemondb.net/item/" + item.name.toLowerCase().replace(" ", "-").replace("'", "") + ")"
                     }
                 ],
-                footer: {
-                    text: capitalizeFirstLetter(item.name),
-                    icon_url: "https://raw.githubusercontent.com/110Percent/beheeyem-data/master/sprites/items/" + item.name.toLowerCase().replace(" ", "-") + ".png"
-                }
+                footer: tFooter
             }
         });
     } else {

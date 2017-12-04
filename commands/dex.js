@@ -5,10 +5,12 @@ const request = require('request'),
     Matcher = require('did-you-mean'),
     url = require('url'),
     http = require('https'),
-    sizeOf = require('image-size');
+    sizeOf = require('image-size'),
+    footers = require('../data/footers.js');
 let dex,
     aliases,
-    match;
+    match,
+    tFooter;
 
 var embedColours = {
     Red: 16724530,
@@ -128,7 +130,13 @@ exports.action = (msg, args) => {
         if (!pokedexEntry) {
             var pokedexEntry = "*An unknown error occurred.*";
         }
-
+        tFooter = Math.floor(Math.random() * 15) == 0 ? {
+            text: footers[Math.floor(Math.random() * footers.length)],
+            icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+        } : {
+            text: "#" + pokeEntry.num,
+            icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
+        };
         var dexEmbed = {
             color: embedColours[pokeEntry.color],
             fields: [{
@@ -178,10 +186,7 @@ exports.action = (msg, args) => {
 
                 width: 80
             },
-            footer: {
-                text: "#" + pokeEntry.num,
-                icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
-            }
+            footer: tFooter
         };
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
                 embed: dexEmbed

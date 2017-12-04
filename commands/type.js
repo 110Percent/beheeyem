@@ -1,4 +1,6 @@
-const typeMatchups = require("../data/typechart.js").BattleTypeChart;
+const typeMatchups = require("../data/typechart.js").BattleTypeChart,
+    footers = require('../data/footers.js');
+let tFooter;
 
 exports.action = (msg, args) => {
     let def = {
@@ -190,6 +192,10 @@ exports.action = (msg, args) => {
         }
         atk.vulnDisplay[3] = "Doesn't affect: " + atk.noTypes.join(", ");
     }
+    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        text: footers[Math.floor(Math.random() * footers.length)],
+        icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+    } : null;
     msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
         embed: {
             color: 35071,
@@ -201,7 +207,8 @@ exports.action = (msg, args) => {
                     name: "Defense",
                     value: def.vulnDisplay.join("\n\n")
                 }
-            ]
+            ],
+            footer: tFooter
         }
     })
 }

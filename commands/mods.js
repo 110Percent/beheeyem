@@ -1,6 +1,7 @@
 // This command isn't functional until Beheeyem joins the /r/Pokemon Discord.
 
-exports.action = (msg, args) => {
+exports.action = null
+    /*(msg, args) => {
     var modsRoleid = 175810054987972608;
     try {
         var mods = beheeyem.guilds.get("111504456838819840").roles.get("264780359332265985").members.map(c => c.user);
@@ -43,4 +44,4 @@ exports.action = (msg, args) => {
         }
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**Moderators**", { embed: embedObject });
     } catch (err) {}
-}
+}*/

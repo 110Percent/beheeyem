@@ -1,7 +1,9 @@
 const request = require('request'),
     requireFromUrl = require('require-from-url/sync'),
-    Matcher = require('did-you-mean');
-let abilities;
+    Matcher = require('did-you-mean'),
+    footers = require('../data/footers.js');
+let abilities,
+    tFooter;
 
 request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/abilities.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
@@ -22,6 +24,10 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
 });
 
 exports.action = (msg, args) => {
+    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        text: footers[Math.floor(Math.random() * footers.length)],
+        icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+    } : null;
     let abilityName = args.toLowerCase();
     if (aliases[abilityName]) {
         abilityName = aliases[abilityName];
@@ -53,7 +59,8 @@ exports.action = (msg, args) => {
                         name: "External Resources",
                         value: "[Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/" + capitalizeFirstLetter(ability.name.replace(" ", "_")) + "_(Ability\\))  |  [Smogon](http://www.smogon.com/dex/sm/abilities/" + ability.name.toLowerCase().replace(" ", "_") + ")  |  [PokémonDB](http://pokemondb.net/ability/" + ability.name.toLowerCase().replace(" ", "-") + ")"
                     }
-                ]
+                ],
+                footer: tFooter
             }
         });
     } else {
