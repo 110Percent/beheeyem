@@ -20,5 +20,16 @@ module.exports = {
         eggs: 'Groupe œuf',
         dex: 'Descriptions du Pokédex (Soleil/Lune)',
         resources: 'Ressources Extérieur'
+    },
+    'jp': {
+        id: 1,
+        abilities: '特性',
+        evoLine: '進化',
+        bases: '種族値',
+        height: 'たかさ',
+        weight: 'おもさ',
+        eggs: 'タマゴグループ',
+        dex: '説明文',
+        resources: '対外 出所'
     }
 }
