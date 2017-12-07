@@ -6,11 +6,16 @@ const request = require('request'),
     url = require('url'),
     http = require('https'),
     sizeOf = require('image-size'),
-    footers = require('../data/footers.js');
+    footers = require('../data/footers.js'),
+    minimist = require('minimist'),
+    locales = require('../data/locales.js');
 let dex,
     aliases,
     match,
-    tFooter;
+    tFooter,
+    mm,
+    mainArgs,
+    locale;
 
 var embedColours = {
     Red: 16724530,
@@ -43,7 +48,12 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
     }
 });
 exports.action = (msg, args) => {
-    var poke = args.toLowerCase();
+    mm = minimist(args.split(' '));
+    mainArgs = mm._.join(' ');
+    locale = mm.lang && locales[mm.lang] ? locales[mm.lang] : locales.en;
+    console.dir(mm);
+    console.log(mainArgs);
+    var poke = mainArgs.toLowerCase();
 
     if (aliases[poke]) {
         poke = aliases[poke];
@@ -119,14 +129,9 @@ exports.action = (msg, args) => {
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
-        let imageURL = 'https://cdn.rawgit.com/110Percent/beheeyem-data/44795927/webp/' + poke.toLowerCase().replace(" ", "_") + ".webp";
+        let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + poke.toLowerCase().replace(" ", "_") + ".webp";
 
-        for (var i = dexEntries.length - 1; i > -1; i--) {
-            if (dexEntries[i].species_id == pokeEntry.num && dexEntries[i].language_id == 9) {
-                var pokedexEntry = "*" + dexEntries[i].flavor_text + "*";
-                break;
-            }
-        }
+        var pokedexEntry = dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText;
         if (!pokedexEntry) {
             var pokedexEntry = "*An unknown error occurred.*";
         }
@@ -145,39 +150,39 @@ exports.action = (msg, args) => {
                     inline: true
                 },
                 {
-                    name: "Abilities",
+                    name: locale.abilities,
                     value: abilityString,
                     inline: true
                 },
                 {
-                    name: "Evolutionary Line",
+                    name: locale.evoLine,
                     value: evoLine,
                     inline: false
                 },
                 {
-                    name: "Base Stats",
+                    name: locale.bases,
                     value: Object.keys(pokeEntry.baseStats).map(i => i.toUpperCase() + ": **" + pokeEntry.baseStats[i] + "**").join(", ")
                 },
                 {
-                    name: "Height",
+                    name: locale.height,
                     value: pokeEntry.heightm + "m",
                     inline: true
                 },
                 {
-                    name: "Weight",
+                    name: locale.weight,
                     value: pokeEntry.weightkg + "kg",
                     inline: true
                 },
                 {
-                    name: "Egg Groups",
+                    name: locale.eggs,
                     value: pokeEntry.eggGroups.join(", ")
                 },
                 {
-                    name: "Dex Entry (Sun/Moon)",
+                    name: locale.dex,
                     value: pokedexEntry
                 },
                 {
-                    name: "External Resources",
+                    name: locale.resources,
                     value: "[Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/" + capitalizeFirstLetter(poke).replace(" ", "_") + "_(Pokémon\\))  |  [Smogon](http://www.smogon.com/dex/sm/pokemon/" + poke.replace(" ", "_") + ")  |  [PokémonDB](http://pokemondb.net/pokedex/" + poke.replace(" ", "-") + ")"
                 }
             ],
@@ -193,7 +198,7 @@ exports.action = (msg, args) => {
             })
             .catch(console.error);
     } else {
-        let dym = match.get(args);
+        let dym = match.get(mainArgs);
         let dymString;
         if (dym == null) {
             dymString = 'Maybe you misspelt the Pokémon\'s name?';
