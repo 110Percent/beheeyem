@@ -7,7 +7,7 @@ module.exports = {
         height: 'Height',
         weight: 'Weight',
         eggs: 'Egg Groups',
-        dex: 'Dex Entry (Sun/Moon)',
+        dex: 'Dex Entry (Ultra Sun/Ultra Moon)',
         resources: 'External Resources'
     },
     'fr': {
@@ -18,7 +18,7 @@ module.exports = {
         height: 'Taille',
         weight: 'Poids',
         eggs: 'Groupe œuf',
-        dex: 'Descriptions du Pokédex (Soleil/Lune)',
+        dex: 'Descriptions du Pokédex (Ultra-Soleil/Ultra-Lune)',
         resources: 'Ressources Extérieur'
     },
     'jp': {
