@@ -8,7 +8,8 @@ const request = require('request'),
     sizeOf = require('image-size'),
     footers = require('../data/footers.js'),
     minimist = require('minimist'),
-    locales = require('../data/locales.js');
+    locales = require('../data/locales.js'),
+    otherAliases = require('../data/otherAliases.json');
 let dex,
     aliases,
     match,
@@ -29,10 +30,6 @@ var embedColours = {
     White: 14803425,
     Pink: 16737701
 };
-
-let otherAliases = {
-    'ho-oh': 'hooh'
-}
 
 request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/pokedex.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
@@ -132,15 +129,13 @@ exports.action = (msg, args) => {
             imagefetch = "0" + imagefetch;
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
+
         let imgPoke = poke.toLowerCase();
         for (let r in otherAliases) {
-            console.log(r, otherAliases[r]);
             imgPoke = imgPoke.replace(r, otherAliases[r]);
         }
-        console.log(imgPoke)
 
         let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "_") + ".webp";
-        console.log(imageURL);
 
         var pokedexEntry = dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText;
         if (!pokedexEntry) {

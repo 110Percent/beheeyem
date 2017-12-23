@@ -4,7 +4,8 @@ const Discord = require("discord.js"),
     jsonfile = require("jsonfile"),
     path = require("path"),
     request = require("request"),
-    colors = require('colors');
+    colors = require('colors'),
+    otherAliases = require('./data/otherAliases.json');
 var config = require('./config.js'),
     imageCheck;
 
@@ -163,10 +164,15 @@ function checkItalics(msg) {
         if (pokeName.indexOf('shiny') != -1) {
             isShiny = true;
             pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
+
         }
         pokeName = pokeName.replace(" ", "-");
+        let imgPoke = pokeName.toLowerCase();
+        for (let r in otherAliases) {
+            imgPoke = imgPoke.replace(r, otherAliases[r]);
+        }
         if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
-        request(urlBuild + pokeName + ".gif", (err, response) => {;
+        request(urlBuild + imgPoke + ".gif", (err, response) => {;
             if (!err) {
                 if (response.statusCode == 200) {
                     msg.channel.send('', {
@@ -188,8 +194,12 @@ function checkItalics(msg) {
                 pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
             }
             pokeName = pokeName.replace(" ", "-");
+            let imgPoke = pokeName.toLowerCase();
+            for (let r in otherAliases) {
+                imgPoke = imgPoke.replace(r, otherAliases[r]);
+            }
             if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
-            request(urlBuild + pokeName + ".gif", (err, response) => {
+            request(urlBuild + imgPoke + ".gif", (err, response) => {
                 if (!err) {
                     if (response.statusCode == 200) {
                         isFound == true;
