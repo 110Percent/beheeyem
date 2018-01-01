@@ -41,7 +41,7 @@ exports.action = (msg, args) => {
                 },
                 {
                     name: "b.type",
-                    value: "`b.type psychic`\nShows the damage modifiers for a set\nof types.Multiple types can be entered.",
+                    value: "`b.type psychic`\nShows the damage modifiers for a set\nof types. Multiple types can be entered.",
                     inline: true
                 },
                 {
@@ -51,7 +51,7 @@ exports.action = (msg, args) => {
                 },
                 {
                     name: 'b.user-info',
-                    value: '`b.user-info <mention>`\nDisplays informaton on a user.',
+                    value: '`b.user-info <mention>`\nDisplays information on a user.',
                     inline: true
                 }
             ],
