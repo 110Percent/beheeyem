@@ -45,6 +45,7 @@ exports.action = (msg, args) => {
         icon_url: "https://raw.githubusercontent.com/110Percent/beheeyem-data/master/sprites/items/" + item.name.toLowerCase().replace(" ", "-") + ".png"
     };
     if (item) {
+        console.log(`Sending item ${item.name} to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(item.name) + "**", {
             embed: {
                 color: 35071,

@@ -196,6 +196,7 @@ exports.action = (msg, args) => {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
     } : null;
+    console.log(`Sending type(s) ${displayTypes.join(', ')} to guild ${msg.guild.name}`);
     msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
         embed: {
             color: 35071,

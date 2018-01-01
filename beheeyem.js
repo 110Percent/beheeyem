@@ -15,7 +15,6 @@ var config = require('./config.js'),
 Object.keys(dex).map(function(key, index) {
     species.push(dex[key].species.toLowerCase());
 });
-console.log(species);
 
 console.log("Starting Beheeyem...");
 
