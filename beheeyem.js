@@ -1,4 +1,4 @@
-const Discord = require("discord.js"),
+const Discord = require("discord.js"), // Require Node modules and initialize Discord client
     beheeyem = new Discord.Client(),
     fs = require("fs"),
     jsonfile = require("jsonfile"),
@@ -11,63 +11,50 @@ var config = require('./config.js'),
 
 console.log("Starting Beheeyem...");
 
-var commands = loadCommands();
+var commands = loadCommands(); // Load commands into the commands object
 
 beheeyem.on("ready", function() {
     console.log(("Beheeyem is active! Currently serving in " + String(beheeyem.guilds.size).white + " guilds.\n".green).bold);
-    beheeyem.user.setGame("b.help");
-    try {
-        request({
-            headers: {
-                'Authorization': config.dbotsToken
-            },
-            uri: `https://bots.discord.pw/api/bots/${beheeyem.user.id}/stats`,
-            body: JSON.stringify({
-                'server_count': beheeyem.guilds.size
-            }),
-            method: 'POST'
-        });
-    } catch (err) {
-        console.log("Could not update server count on Discord Bots website.".yellow + `\n${err}`);
-    }
+    beheeyem.user.setGame("b.help"); //Set "playing" status on the user's profile
 
 
 });
 
 function loadCommands() {
     console.log('Loading commands...'.cyan)
-    var commands = {};
-    let errCount = 0;
-    cmdfiles = fs.readdirSync('./commands/');
+    let commands = {}, // Initialize values
+        errCount = 0;
+    cmdfiles = fs.readdirSync('./commands/'); // Read files in the commands directory
     cmdfiles.forEach(filename => {
         var cmdName = filename.split('.')[0];
-        try {
+        try { // Attempt to load the command into the bot
             commands[cmdName] = require('./commands/' + filename);
             console.log('Loaded '.green + cmdName.yellow.bold);
-        } catch (err) {
+        } catch (err) { // If unsuccessful, display an error
             if (err) {
                 errCount++;
                 console.log('Error in '.red + cmdName.yellow + '!'.red + '\n' + err.stack);
             }
         }
     });
-    console.log('Loaded commands with '.cyan + (errCount > 0 ? errCount.toString().red : 'no'.green) + ` error${errCount == 1? '' : 's'}!`.cyan);
+    console.log('Loaded commands with '.cyan + (errCount > 0 ? errCount.toString().red : 'no'.green) + ` error${errCount == 1? '' : 's'}!`.cyan); // Print number of errored commands, if any.
     return commands;
 }
 
-beheeyem.on("message", msg => {
-    if (msg.author.id != beheeyem.user.id && !msg.author.bot) {
-        if (msg.content.startsWith(config.prefix)) {
-            var commandstring = msg.content.substring(config.prefix.length);
-            var cmd = commandstring.split(" ")[0];
-            var args = commandstring.substring(cmd.length + 1);
+beheeyem.on("message", msg => { // Fires when a message is sent that can be detected by Beheeyem
+    if (msg.author.id != beheeyem.user.id && !msg.author.bot) { // Ensures Beheeyem doesn't detect messages from bots or itself 
+        if (msg.content.startsWith(config.prefix)) { // Check to see if the message is an attempted command
+            let commandstring = msg.content.substring(config.prefix.length),
+                cmd = commandstring.split(" ")[0], // Split the message into more readable argument/command portions
+                args = commandstring.substring(cmd.length + 1);
 
-            if (commands[cmd]) {
+            if (commands[cmd]) { // If a command by the name of the attempted name exists, try to fire it
                 try {
                     commands[cmd].action(msg, args, beheeyem);
                 } catch (err) {
-                    console.error(err);
+                    console.error(err); // If unsuccessful, log the error.
                 }
+                // TO MOVE TO SEPARATE FILES
             } else if (cmd == "obtain") {
                 msg.channel.send("Honestly, just use Bulbapedia. The encounter data on the web is so inconsistent and undreadable that there's no way I could create an obtainability command. Sorry about that. 🙁");
             } else if (cmd == "deathbird") {
@@ -80,13 +67,8 @@ beheeyem.on("message", msg => {
                     file: "https://i.imgur.com/bAxMdQ0.png",
                     name: "Filename.jpeg.gif.webp.mp4.exe.bat.sh.app.png"
                 });
-            } else if (msg.author.id == 120887602395086848) {
-                if (cmd == "addnonya") {
-                    var nonyas = require("./data/nonyas.json");
-                    nonyas.nonyas.push(args);
-                    jsonfile.writeFileSync("./data/nonyas.json", nonyas);
-                    msg.channel.send("👌🏾 Sucessfully added Nonya!");
-                } else if (cmd == 'eval') {
+            } else if (msg.author.id == 120887602395086848) { // Commands only to be fired by the bot's owner
+                if (cmd == 'eval') {
                     try {
                         msg.channel.sendMessage("", {
                             embed: {
@@ -122,46 +104,28 @@ beheeyem.on("message", msg => {
                     }
                 }
             }
+        } else { // If a command was fired, do not check for italics in the messsage.
+            checkItalics(msg);
         }
-        imageCheck = false;
-        checkItalics(msg);
     }
 });
 
 
 beheeyem.login(config.token);
 
-beheeyem.on("guildCreate", (guild) => {
-    try {
-        request({
-            headers: {
-                'Authorization': config.dbotsToken
-            },
-            uri: `https://bots.discord.pw/api/bots/${beheeyem.user.id}/stats`,
-            body: JSON.stringify({
-                'server_count': beheeyem.guilds.size
-            }),
-            method: 'POST'
-        });
-    } catch (err) {
-        console.log("Could not update server count on Discord Bots website.".yellow);
-    }
-});
-
-
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter(string) { // Simple function to capitalize the first letter in a string.
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function checkItalics(msg) {
-    let isShiny = false;
-    var isFound = false;
-    let urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/';
-    var asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*");
-    var pokeName;
-    for (var i = 1; i < asteriskSplit.length - 1; i++) {
+function checkItalics(msg) { // Function to be fired if a message is valid for italicization checking
+    let isShiny = false, // Sprite defaults to a non-shiny version
+        isFound = false,
+        urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/', // Default constructor for a sprite
+        asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*"), // Split the message contents by asterisk, making sure to remove any url-tricky characters.
+        pokeName;
+    for (var i = 1; i < asteriskSplit.length - 1; i++) { // Check each substring between asterixes
         pokeName = asteriskSplit[i].toLowerCase();
-        if (pokeName.indexOf('shiny') != -1) {
+        if (pokeName.indexOf('shiny') != -1) { // Detect if the potential pokemon is a shiny
             isShiny = true;
             pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
 
@@ -169,13 +133,13 @@ function checkItalics(msg) {
         pokeName = pokeName.replace(" ", "-");
         let imgPoke = pokeName.toLowerCase();
         for (let r in otherAliases) {
-            imgPoke = imgPoke.replace(r, otherAliases[r]);
+            imgPoke = imgPoke.replace(r, otherAliases[r]); // Fix custom aliases
         }
         if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
-        request(urlBuild + imgPoke + ".gif", (err, response) => {;
+        request(urlBuild + imgPoke + ".gif", (err, response) => {; // Check to see if the sprite for the desired Pokemon exists
             if (!err) {
                 if (response.statusCode == 200) {
-                    msg.channel.send('', {
+                    msg.channel.send('', { // If it does, send it
                         file: response.request.href
                     });
                     isFound = true;
@@ -184,7 +148,7 @@ function checkItalics(msg) {
         });
         if (isFound) break;
     }
-    if (!isFound) {
+    if (!isFound) { // Same stuff with underscores (to be fixed)
         var underSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("_");
         var pokeName;
         for (var i = 1; i < underSplit.length - 1; i++) {
