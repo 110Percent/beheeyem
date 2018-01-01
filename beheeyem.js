@@ -124,6 +124,7 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*"); // Split the message contents by asterisk, making sure to remove any url-tricky characters.
     var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) { // Check each substring between asterixes
+        if (i > 3) break;
         pokeName = asteriskSplit[i].toLowerCase();
         if (pokeName.indexOf('shiny') != -1) { // Detect if the potential pokemon is a shiny
             isShiny = true;
@@ -152,6 +153,7 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         var underSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("_");
         var pokeName;
         for (var i = 1; i < underSplit.length - 1; i++) {
+            if (i > 3) break;
             pokeName = underSplit[i].toLowerCase();
             if (pokeName.indexOf('shiny') != -1) {
                 isShiny = true;
