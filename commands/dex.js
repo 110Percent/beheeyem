@@ -52,7 +52,6 @@ exports.action = (msg, args) => {
     mm = minimist(args.split(' '));
     mainArgs = mm._.join(' ');
     locale = mm.lang && locales[mm.lang] ? locales[mm.lang] : locales.en;
-    console.dir(mm);
     var poke = mainArgs.toLowerCase();
 
     if (aliases[poke]) {
@@ -200,6 +199,7 @@ exports.action = (msg, args) => {
             },
             footer: tFooter
         };
+        console.log(`Sending ${poke} dex to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
                 embed: dexEmbed
             })
