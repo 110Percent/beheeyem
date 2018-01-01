@@ -121,8 +121,8 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
     let isShiny = false, // Sprite defaults to a non-shiny version
         isFound = false,
         urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/', // Default constructor for a sprite
-        asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*"), // Split the message contents by asterisk, making sure to remove any url-tricky characters.
-        pokeName;
+        asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*"); // Split the message contents by asterisk, making sure to remove any url-tricky characters.
+    var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) { // Check each substring between asterixes
         pokeName = asteriskSplit[i].toLowerCase();
         if (pokeName.indexOf('shiny') != -1) { // Detect if the potential pokemon is a shiny
