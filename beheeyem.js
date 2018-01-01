@@ -147,7 +147,6 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         for (let r in otherAliases) {
             imgPoke = imgPoke.replace(r, otherAliases[r]); // Fix custom aliases
         }
-        console.log(pokeName, pokeCount, pokePast);
         if (pokeCount > 1) break;
         if (pokePast.indexOf(imgPoke) != -1) continue;
         pokePast.push(imgPoke);
@@ -181,7 +180,6 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
             for (let r in otherAliases) {
                 imgPoke = imgPoke.replace(r, otherAliases[r]);
             }
-            console.log(pokeName, pokeCount, pokePast);
             if (pokeCount > 1) break;
             if (pokePast.indexOf(imgPoke) != -1) continue;
             pokePast.push(imgPoke);
