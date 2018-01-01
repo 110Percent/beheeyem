@@ -113,8 +113,8 @@ exports.action = (msg, args) => {
             ],
             footer: tFooter
         };
+        console.log(`Sending move ${move.name} to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(move.name) + "**", { embed: embedObject });
-        console.log(embedObject);
     }
 }
 
