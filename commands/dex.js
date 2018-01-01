@@ -53,7 +53,6 @@ exports.action = (msg, args) => {
     mainArgs = mm._.join(' ');
     locale = mm.lang && locales[mm.lang] ? locales[mm.lang] : locales.en;
     console.dir(mm);
-    console.log(mainArgs);
     var poke = mainArgs.toLowerCase();
 
     if (aliases[poke]) {
