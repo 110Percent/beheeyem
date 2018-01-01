@@ -62,6 +62,8 @@ exports.action = (msg, args) => {
     poke = poke.toLowerCase();
     if (poke.split(" ")[0] == "mega") {
         poke = poke.substring(poke.split(" ")[0].length + 1) + "mega";
+    } else if (poke.split(' ')[0] == "alolan") {
+        poke = poke.substring(poke.split(" ")[0].length + 1) + "alola";
     }
     var pokeEntry = dex[poke];
     if (!pokeEntry) {

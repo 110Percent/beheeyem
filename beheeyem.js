@@ -5,9 +5,17 @@ const Discord = require("discord.js"), // Require Node modules and initialize Di
     path = require("path"),
     request = require("request"),
     colors = require('colors'),
-    otherAliases = require('./data/otherAliases.json');
+    otherAliases = require('./data/otherAliases.json'),
+    requireFromUrl = require('require-from-url');
 var config = require('./config.js'),
-    imageCheck;
+    imageCheck,
+    dex = require('./data/pokedex.js').BattlePokedex,
+    species = [],
+    aliases = require('./data/aliases.js').BattleAliases;
+Object.keys(dex).map(function(key, index) {
+    species.push(dex[key].species.toLowerCase());
+});
+console.log(species);
 
 console.log("Starting Beheeyem...");
 
@@ -40,6 +48,7 @@ function loadCommands() {
     console.log('Loaded commands with '.cyan + (errCount > 0 ? errCount.toString().red : 'no'.green) + ` error${errCount == 1? '' : 's'}!`.cyan); // Print number of errored commands, if any.
     return commands;
 }
+
 
 beheeyem.on("message", msg => { // Fires when a message is sent that can be detected by Beheeyem
     if (msg.author.id != beheeyem.user.id && !msg.author.bot) { // Ensures Beheeyem doesn't detect messages from bots or itself 
@@ -118,14 +127,16 @@ function capitalizeFirstLetter(string) { // Simple function to capitalize the fi
 }
 
 function checkItalics(msg) { // Function to be fired if a message is valid for italicization checking
-    let isShiny = false, // Sprite defaults to a non-shiny version
-        isFound = false,
-        urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/', // Default constructor for a sprite
-        asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*"); // Split the message contents by asterisk, making sure to remove any url-tricky characters.
+    let isFound = false,
+        asteriskSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("*"), // Split the message contents by asterisk, making sure to remove any url-tricky characters.
+        pokePast = [],
+        pokeCount = 0;
     var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) { // Check each substring between asterixes
-        if (i > 3) break;
+
         pokeName = asteriskSplit[i].toLowerCase();
+        let isShiny = false, // Sprite defaults to a non-shiny version
+            urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
         if (pokeName.indexOf('shiny') != -1) { // Detect if the potential pokemon is a shiny
             isShiny = true;
             pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
@@ -136,6 +147,11 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         for (let r in otherAliases) {
             imgPoke = imgPoke.replace(r, otherAliases[r]); // Fix custom aliases
         }
+        console.log(pokeName, pokeCount, pokePast);
+        if (pokeCount > 1) break;
+        if (pokePast.indexOf(imgPoke) != -1) continue;
+        pokePast.push(imgPoke);
+        if (species[imgPoke]) pokeCount++;
         if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
         request(urlBuild + imgPoke + ".gif", (err, response) => {; // Check to see if the sprite for the desired Pokemon exists
             if (!err) {
@@ -153,7 +169,8 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         var underSplit = msg.content.replace(/#/g, '').replace(/\?/g, '').split("_");
         var pokeName;
         for (var i = 1; i < underSplit.length - 1; i++) {
-            if (i > 3) break;
+            let isShiny = false, // Sprite defaults to a non-shiny version
+                urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
             pokeName = underSplit[i].toLowerCase();
             if (pokeName.indexOf('shiny') != -1) {
                 isShiny = true;
@@ -164,6 +181,11 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
             for (let r in otherAliases) {
                 imgPoke = imgPoke.replace(r, otherAliases[r]);
             }
+            console.log(pokeName, pokeCount, pokePast);
+            if (pokeCount > 1) break;
+            if (pokePast.indexOf(imgPoke) != -1) continue;
+            pokePast.push(imgPoke);
+            if (species[imgPoke]) pokeCount++;
             if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
             request(urlBuild + imgPoke + ".gif", (err, response) => {
                 if (!err) {
