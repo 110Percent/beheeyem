@@ -1,4 +1,8 @@
-const cheerio = require('cheerio'),
+module.exports = { action: () => {} };
+
+// This command is now deprecated, due to the shutdown of Miiverse.
+
+/*const cheerio = require('cheerio'),
     request = require('request');
 
 exports.action = (msg, args) => {
@@ -79,4 +83,4 @@ exports.action = (msg, args) => {
             });
         });
 
-}
+}*/
