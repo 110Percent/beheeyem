@@ -23,7 +23,7 @@ exports.action = (msg, args) => {
                     msg.channel.send('What are these dice...?');
                     return;
                 }
-                if (Number(args.split("d")[1]) > 0 && Number(args.split("d")[1]) = < 100) {
+                if (Number(args.split("d")[1]) > 0 && Number(args.split("d")[1]) <= 100) {
                     for (var i = 0; i < numDice; i++) {
                         dice.push(Number(Math.ceil(Math.random() * Number(args.split("d")[1]))));
                     }
