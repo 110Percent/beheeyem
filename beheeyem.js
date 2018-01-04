@@ -132,7 +132,6 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         pokeCount = 0;
     var pokeName;
     for (var i = 1; i < asteriskSplit.length - 1; i++) { // Check each substring between asterixes
-        console.log(pokeCount);
         pokeName = asteriskSplit[i].toLowerCase();
         let isShiny = false, // Sprite defaults to a non-shiny version
             urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
@@ -149,7 +148,6 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         if (pokeCount > 1) break;
         if (pokePast.indexOf(imgPoke) != -1) continue;
         pokePast.push(imgPoke);
-        console.log(imgPoke, species[imgPoke]);
         if (species.indexOf(imgPoke) > -1) pokeCount++;
         if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
         request(urlBuild + imgPoke + ".gif", (err, response) => {; // Check to see if the sprite for the desired Pokemon exists
