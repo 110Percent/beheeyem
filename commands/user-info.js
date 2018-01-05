@@ -49,7 +49,7 @@ exports.action = (msg, args, beheeyem) => {
                 },
                 {
                     name: 'Last Seen',
-                    value: targetUser.user.lastMessage ? moment(targetUser.user.lastMessage.createdTimestamp).calendar() + ' (Eastern)' : 'Unknown',
+                    value: targetUser.user.lastMessage ? moment(targetUser.user.lastMessage.createdTimestamp).calendar() + ' UTC' : 'Unknown',
                     inline: true
                 },
                 {
