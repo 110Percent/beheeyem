@@ -135,16 +135,18 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         pokeName = asteriskSplit[i].toLowerCase();
         let isShiny = false, // Sprite defaults to a non-shiny version
             urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
+        for (let r in otherAliases) {
+            if (pokeName.indexOf(r) != -1) {
+                pokeName = pokeName.replace(r, otherAliases[r]); // Fix custom aliases
+            }
+        }
+        pokeName = pokeName.replace(" ", "-");
         if (pokeName.indexOf('shiny') != -1) { // Detect if the potential pokemon is a shiny
             isShiny = true;
             pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
 
         }
-        pokeName = pokeName.replace(" ", "-");
         let imgPoke = pokeName.toLowerCase();
-        for (let r in otherAliases) {
-            imgPoke = imgPoke.replace(r, otherAliases[r]); // Fix custom aliases
-        }
         if (pokeCount > 1) break;
         if (pokePast.indexOf(imgPoke) != -1) continue;
         pokePast.push(imgPoke);
@@ -169,15 +171,17 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
             let isShiny = false, // Sprite defaults to a non-shiny version
                 urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
             pokeName = underSplit[i].toLowerCase();
+            for (let r in otherAliases) {
+                if (pokeName.indexOf(r) != -1) {
+                    pokeName = pokeName.replace(r, otherAliases[r]); // Fix custom aliases
+                }
+            }
             if (pokeName.indexOf('shiny') != -1) {
                 isShiny = true;
                 pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
             }
             pokeName = pokeName.replace(" ", "-");
             let imgPoke = pokeName.toLowerCase();
-            for (let r in otherAliases) {
-                imgPoke = imgPoke.replace(r, otherAliases[r]);
-            }
             if (pokeCount > 1) break;
             if (pokePast.indexOf(imgPoke) != -1) continue;
             pokePast.push(imgPoke);
