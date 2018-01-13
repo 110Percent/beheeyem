@@ -9,7 +9,7 @@ const request = require('request'),
     footers = require('../data/footers.js'),
     minimist = require('minimist'),
     locales = require('../data/locales.js'),
-    otherAliases = require('../data/otherAliases.json');
+    otherAliases = require('../data/otherAliases.js');
 let dex,
     aliases,
     match,
@@ -130,9 +130,10 @@ exports.action = (msg, args) => {
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
-        let imgPoke = poke.toLowerCase();
-        for (let r in otherAliases) {
-            imgPoke = imgPoke.replace(r, otherAliases[r]);
+        let imgPoke = poke.toLowerCase(),
+            a = otherAliases.aliases(msg.guild.id);
+        for (let r in a) {
+            imgPoke = imgPoke.replace(r, a[r]);
         }
 
         let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "_") + ".webp";
