@@ -22,7 +22,7 @@ var commands = loadCommands(); // Load commands into the commands object
 
 beheeyem.on("ready", function() {
     console.log(("Beheeyem is active! Currently serving in " + String(beheeyem.guilds.size).white + " guilds.\n".green).bold);
-    beheeyem.user.setGame("b.help"); //Set "playing" status on the user's profile
+    beheeyem.user.setActivity("b.help"); //Set "playing" status on the user's profile
 
 
 });
@@ -156,7 +156,7 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         request(urlBuild + imgPoke + ".gif", (err, response) => {; // Check to see if the sprite for the desired Pokemon exists
             if (!err) {
                 if (response.statusCode == 200) {
-                    msg.channel.send('', { // If it does, send it
+                    msg.channel.send('', { // If it does, send it  
                         file: response.request.href
                     });
                     isFound = true;

@@ -234,15 +234,25 @@ diff@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/diff/-/diff-2.2.3.tgz#60eafd0d28ee906e4e8ff0a52c1229521033bf99"
 
-discord.js@^11.2.1:
-  version "11.2.1"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-11.2.1.tgz#bfc0f5a8b6398dc372d026e503592646456053fc"
+discord.js@hydrabolt/discord.js#11.3-dev:
+  version "11.3.0"
+  resolved "https://codeload.github.com/hydrabolt/discord.js/tar.gz/2efe2d28f2a173e92ab2bde7231cf293faffcdc4"
   dependencies:
     long "^3.2.0"
     prism-media "^0.0.1"
     snekfetch "^3.3.0"
     tweetnacl "^1.0.0"
     ws "^3.1.0"
+
+discord.js@hydrabolt/discord.js#master:
+  version "12.0.0-dev"
+  resolved "https://codeload.github.com/hydrabolt/discord.js/tar.gz/352bd13e6f590e12d5e2e3be0cf836e929cef74b"
+  dependencies:
+    pako "^1.0.0"
+    prism-media "^0.0.2"
+    snekfetch "^3.5.0"
+    tweetnacl "^1.0.0"
+    ws "^3.3.1"
 
 dom-serializer@0, dom-serializer@~0.1.0:
   version "0.1.0"
@@ -780,6 +790,10 @@ pako:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.4.tgz#412cc97c3b7ff06dc6c2557fd4f03d06f5e708d4"
 
+pako@^1.0.0:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
+
 parse5@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-3.0.2.tgz#05eff57f0ef4577fb144a79f8b9a967a6cc44510"
@@ -803,6 +817,10 @@ pinkie@^2.0.0:
 prism-media@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-0.0.1.tgz#a3425c9cabd50d1c6c02e543941a11895667bd10"
+
+prism-media@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-0.0.2.tgz#aa917b084576c4df6488e4ea8e7d6d44aed4b411"
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
@@ -898,7 +916,7 @@ shelljs@0.3.x:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.3.0.tgz#3596e6307a781544f591f37da618360f31db57b1"
 
-snekfetch@^3.3.0:
+snekfetch@^3.3.0, snekfetch@^3.5.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/snekfetch/-/snekfetch-3.6.1.tgz#9b77fa946cfa15c7041940593a2689dc547427ea"
 
@@ -1040,7 +1058,7 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-ws@^3.1.0:
+ws@^3.1.0, ws@^3.3.1:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.3.tgz#f1cf84fe2d5e901ebce94efaece785f187a228f2"
   dependencies:
