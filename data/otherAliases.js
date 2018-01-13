@@ -58,7 +58,7 @@ let custom = {
 
 exports.aliases = (id) => {
     if (id == 111504456838819840) {
-        return toReturn;
+        return aDefault;
     } else {
         return Object.assign(aDefault, custom);
     }
