@@ -5,7 +5,7 @@ const Discord = require("discord.js"), // Require Node modules and initialize Di
     path = require("path"),
     request = require("request"),
     colors = require('colors'),
-    otherAliases = require('./data/otherAliases.json'),
+    otherAliases = require('./data/otherAliases.js'),
     requireFromUrl = require('require-from-url');
 var config = require('./config.js'),
     imageCheck,
@@ -135,9 +135,10 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         pokeName = asteriskSplit[i].toLowerCase();
         let isShiny = false, // Sprite defaults to a non-shiny version
             urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
-        for (let r in otherAliases) {
+        a = otherAliases.aliases(msg.guild.id);
+        for (let r in a) {
             if (pokeName.indexOf(r) != -1) {
-                pokeName = pokeName.replace(r, otherAliases[r]); // Fix custom aliases
+                pokeName = pokeName.replace(r, a[r]); // Fix custom aliases
             }
         }
         pokeName = pokeName.replace(" ", "-");
@@ -170,10 +171,11 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         for (var i = 1; i < underSplit.length - 1; i++) {
             let isShiny = false, // Sprite defaults to a non-shiny version
                 urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
+            a = otherAliases.aliases(msg.guild.id)
             pokeName = underSplit[i].toLowerCase();
-            for (let r in otherAliases) {
+            for (let r in a) {
                 if (pokeName.indexOf(r) != -1) {
-                    pokeName = pokeName.replace(r, otherAliases[r]); // Fix custom aliases
+                    pokeName = pokeName.replace(r, a[r]); // Fix custom aliases
                 }
             }
             if (pokeName.indexOf('shiny') != -1) {
