@@ -78,7 +78,7 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
             } else if (msg.author.id == 120887602395086848) { // Commands only to be fired by the bot's owner
                 if (cmd == 'eval') {
                     try {
-                        msg.channel.sendMessage("", {
+                        msg.channel.send("", {
                             embed: {
                                 title: '🖥 JavaScript Eval',
                                 fields: [{
@@ -87,14 +87,14 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
                                     },
                                     {
                                         name: "Output",
-                                        value: eval(args)
+                                        value: String(eval(args))
                                     }
                                 ],
                                 color: 5561189
                             }
                         });
                     } catch (err) {
-                        msg.channel.sendMessage("", {
+                        msg.channel.send("", {
                             embed: {
                                 title: '⚠ Error',
                                 fields: [{
