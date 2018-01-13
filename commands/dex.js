@@ -135,7 +135,13 @@ exports.action = (msg, args) => {
         let imgPoke = poke.toLowerCase(),
             a = otherAliases.aliases(msg.guild.id);
         for (let r in a) {
-            imgPoke = imgPoke.replace(r, a[r]);
+            let sp = imgPoke.split(' ')
+            for (let i = 0; i < sp.length; i++) {
+                if (sp[i] == r) {
+                    sp[i] = a[r];
+                }
+            }
+            imgPoke = sp.join(' ');
         }
 
         let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "_") + ".webp";
@@ -206,6 +212,7 @@ exports.action = (msg, args) => {
             },
             footer: tFooter
         };
+        console.log(imageURL);
         console.log(`Sending ${poke} dex to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
                 embed: dexEmbed
