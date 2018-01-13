@@ -149,6 +149,10 @@ exports.action = (msg, args) => {
             text: "#" + pokeEntry.num,
             icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
         };
+        let totalStats = 0;
+        for (let i in pokeEntry.baseStats) {
+            totalStats += pokeEntry.baseStats[i];
+        }
         var dexEmbed = {
             color: embedColours[pokeEntry.color],
             fields: [{
@@ -168,7 +172,7 @@ exports.action = (msg, args) => {
                 },
                 {
                     name: locale.bases,
-                    value: Object.keys(pokeEntry.baseStats).map(i => i.toUpperCase() + ": **" + pokeEntry.baseStats[i] + "**").join(", ")
+                    value: Object.keys(pokeEntry.baseStats).map(i => i.toUpperCase() + ": **" + pokeEntry.baseStats[i] + "**").join(", ") + `, TOTAL: **${totalStats}**`
                 },
                 {
                     name: locale.height,
