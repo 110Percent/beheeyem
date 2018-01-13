@@ -132,6 +132,7 @@ exports.action = (msg, args) => {
 
         let imgPoke = poke.toLowerCase(),
             a = otherAliases.aliases(msg.guild.id);
+        console.log(a)
         for (let r in a) {
             imgPoke = imgPoke.replace(r, a[r]);
         }
