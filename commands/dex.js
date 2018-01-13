@@ -121,6 +121,8 @@ exports.action = (msg, args) => {
                 abilityString = abilityString + ", " + pokeEntry.abilities[i];
             }
         }
+
+        if (abilityString == '' || abilityString == undefined) abilityString = 'None';
         var imagefetch = pokeEntry.num;
         if (imagefetch < 100) {
             imagefetch = "0" + imagefetch;
@@ -138,7 +140,7 @@ exports.action = (msg, args) => {
 
         let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "_") + ".webp";
 
-        var pokedexEntry = dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText;
+        var pokedexEntry = dexEntries[pokeEntry.num] ? dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText : 'No data found.';
         if (!pokedexEntry) {
             var pokedexEntry = "*An unknown error occurred.*";
         }
