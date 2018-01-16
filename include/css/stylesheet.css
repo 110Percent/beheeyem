@@ -81,7 +81,7 @@ li {
     padding-left: 20%;
     padding-right: 20%;
     padding-top: 5%;
-    padding-bottom: 5%;
+    padding-bottom: 8%;
     text-align: center;
 }
 
@@ -144,4 +144,11 @@ footer span {
     padding: 10px;
     border: #7289DA 1px solid;
     border-radius: 10px;
+}
+
+.sponsors {
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-bottom: 5%;
+    text-align: center;
 }
