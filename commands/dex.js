@@ -58,10 +58,17 @@ exports.action = (msg, args) => {
         poke = aliases[poke];
     }
     poke = poke.toLowerCase();
+    let a = otherAliases.aliases(msg.guild.id);
+    for (let r in a) {
+        if (poke.startsWith(r)) poke = poke.replace(`${r} `, `${a[r]} `);
+        if (poke.endsWith(r)) poke = poke.replace(` ${r}`, ` ${a[r]}`);
+        if (poke == r) poke = a[r];
+        if (poke.indexOf(` ${r} `) > -1) poke = poke.replace(` ${r} `, ` ${a[r]} `);
+    }
     if (poke.split(" ")[0] == "mega") {
-        poke = poke.substring(poke.split(" ")[0].length + 1) + "mega";
+        poke = poke.substring(poke.split(" ")[0].length + 1) + "-mega";
     } else if (poke.split(' ')[0] == "alolan") {
-        poke = poke.substring(poke.split(" ")[0].length + 1) + "alola";
+        poke = poke.substring(poke.split(" ")[0].length + 1) + "-alola";
     }
     var pokeEntry = dex[poke];
     if (!pokeEntry) {
@@ -132,19 +139,9 @@ exports.action = (msg, args) => {
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
-        let imgPoke = poke.toLowerCase(),
-            a = otherAliases.aliases(msg.guild.id);
-        for (let r in a) {
-            let sp = imgPoke.split(' ')
-            for (let i = 0; i < sp.length; i++) {
-                if (sp[i] == r) {
-                    sp[i] = a[r];
-                }
-            }
-            imgPoke = sp.join(' ');
-        }
+        let imgPoke = poke.toLowerCase()
 
-        let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "_") + ".webp";
+        let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "") + ".webp";
 
         var pokedexEntry = dexEntries[pokeEntry.num] ? dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText : 'No data found.';
         if (!pokedexEntry) {
@@ -155,7 +152,7 @@ exports.action = (msg, args) => {
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
         } : {
             text: "#" + pokeEntry.num,
-            icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "_").toLowerCase() + ".png"
+            icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "-").toLowerCase() + ".png"
         };
         let totalStats = 0;
         for (let i in pokeEntry.baseStats) {
@@ -212,7 +209,6 @@ exports.action = (msg, args) => {
             },
             footer: tFooter
         };
-        console.log(imageURL);
         console.log(`Sending ${poke} dex to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(poke) + "**", {
                 embed: dexEmbed
