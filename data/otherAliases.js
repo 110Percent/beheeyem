@@ -13,7 +13,7 @@ let aDefault = {
     'ace': 'suicune',
     'quote': 'sableye',
     'stall': 'sableye-mega',
-    'surv': 'zorua-shiny',
+    'surv': 'espeon',
     'josh': 'staraptor',
     'luc': 'lucario',
     'flare': 'flareon',
