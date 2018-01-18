@@ -173,6 +173,7 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
             let isShiny = false, // Sprite defaults to a non-shiny version
                 urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/', // Default constructor for a sprite
                 a = otherAliases.aliases(msg.guild.id)
+            console.log(msg.guild.name)
             pokeName = underSplit[i].toLowerCase();
             for (let r in a) {
                 if (pokeName.startsWith(r)) pokeName = pokeName.replace(`${r} `, `${a[r]} `);
