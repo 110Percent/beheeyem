@@ -134,8 +134,8 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
     for (var i = 1; i < asteriskSplit.length - 1; i++) { // Check each substring between asterixes
         pokeName = asteriskSplit[i].toLowerCase();
         let isShiny = false, // Sprite defaults to a non-shiny version
-            urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
-        a = otherAliases.aliases(msg.guild.id);
+            urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/', // Default constructor for a sprite
+            a = otherAliases.aliases(msg.guild.id);
         for (let r in a) {
             if (pokeName.startsWith(r)) pokeName = pokeName.replace(`${r} `, `${a[r]} `);
             if (pokeName.endsWith(r)) pokeName = pokeName.replace(` ${r}`, ` ${a[r]}`);
@@ -171,8 +171,8 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         var pokeName;
         for (var i = 1; i < underSplit.length - 1; i++) {
             let isShiny = false, // Sprite defaults to a non-shiny version
-                urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/'; // Default constructor for a sprite
-            a = otherAliases.aliases(msg.guild.id)
+                urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani/', // Default constructor for a sprite
+                a = otherAliases.aliases(msg.guild.id)
             pokeName = underSplit[i].toLowerCase();
             for (let r in a) {
                 if (pokeName.startsWith(r)) pokeName = pokeName.replace(`${r} `, `${a[r]} `);
