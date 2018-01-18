@@ -5,6 +5,7 @@ let aDefault = {
     'lectro': 'noivern',
     'ngb': 'ampharos',
     'amph': 'ampharos-mega',
+    'shep': 'ampharos-mega',
     'fable': 'flygon-shiny',
     'thane': 'absol',
     'semper': 'flygon',
@@ -57,9 +58,12 @@ let custom = {
 }
 
 exports.aliases = (id) => {
+    console.log(id);
     if (id == 111504456838819840) {
+        console.log('returning default');
         return aDefault;
     } else {
+        console.log('returning custom');
         return Object.assign(aDefault, custom);
     }
 }
