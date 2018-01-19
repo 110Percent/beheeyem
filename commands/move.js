@@ -1,6 +1,26 @@
-const moves = require("../data/moves.js").BattleMovedex,
-    footers = require('../data/footers.js');
-let tFooter;
+const footers = require('../data/footers.js'),
+    request = require('request'),
+    requireFromUrl = require('require-from-url/sync');
+let tFooter,
+    moves,
+    aliases;
+
+request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/moves.js', (err, res, body) => {
+    if (!err && res.statusCode == 200) {
+        moves = requireFromUrl('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/moves.js').BattleMovedex;
+    } else {
+        console.log('Error fetching Showdown dex; Switching to local dex...');
+        moves = require('../data/pokedex.js').BattleMovedex;
+    }
+});
+request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/aliases.js', (err, res, body) => {
+    if (!err && res.statusCode == 200) {
+        aliases = requireFromUrl('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/aliases.js').BattleAliases;
+    } else {
+        console.log('Error fetching Showdown aliases; Switching to local aliases...');
+        aliases = require('../data/aliases.js').BattleAliases;
+    }
+});
 
 exports.action = (msg, args) => {
     var moveName = args.toLowerCase();
