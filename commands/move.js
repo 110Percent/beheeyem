@@ -24,6 +24,9 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
 
 exports.action = (msg, args) => {
     var moveName = args.toLowerCase();
+    if (aliases[moveName]) {
+        itemName = aliases[moveName];
+    }
     var move = moves[moveName];
     if (!move) {
         for (var i = 0; i < Object.keys(moves).length; i++) {
