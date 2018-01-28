@@ -3,7 +3,8 @@ const request = require('request'),
     Matcher = require('did-you-mean'),
     footers = require('../data/footers.js');
 let abilities,
-    tFooter;
+    tFooter,
+    match;
 
 request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/abilities.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
@@ -23,7 +24,16 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
     }
 });
 
-exports.action = (msg, args) => {
+module.exports = {
+    name: 'ability',
+    usage: ['ability <name>'],
+    example: ['ability static'],
+    shortDesc: 'Shows information on an ability.',
+    longDesc: 'Shows the effects of a Pokémon\'s ability, as well as how useful the ability is to have.'
+}
+
+
+module.exports.action = (msg, args) => {
     tFooter = Math.floor(Math.random() * 15) == 0 ? {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'

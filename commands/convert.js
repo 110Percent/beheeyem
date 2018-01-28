@@ -1,7 +1,15 @@
 const convert = require('convert-units');
 let units = convert().possibilities();
 
-exports.action = (msg, args) => {
+module.exports = {
+    name: 'convert',
+    usage: ['convert <amount> <unit> to <unit>'],
+    example: ['convert 5 km to mi'],
+    shortDesc: 'Convert a value between two units.',
+    longDesc: 'Convert a value from one unit to another. For a list of units, see this link:\nhttps://github.com/ben-ng/convert-units#supported-units'
+}
+
+module.exports.action = (msg, args) => {
     if (args) {
         if (args.split(' ')[0].match(/^-?\d+\.?\d*$/) && args.split(' ')[2] == 'to') {
             if (units.indexOf(args.split(' ')[1]) != -1) {

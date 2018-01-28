@@ -4,7 +4,8 @@ const request = require('request'),
     footers = require('../data/footers.js');
 let items,
     aliases,
-    tFooter;
+    tFooter,
+    match;
 
 
 request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/items.js', (err, res, body) => {
@@ -24,13 +25,22 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
         aliases = require('../data/aliases.js').BattleAliases;
     }
 });
-exports.action = (msg, args) => {
+
+module.exports = {
+    name: 'item',
+    usage: ['item <name>'],
+    example: ['item soothe bell'],
+    shortDesc: 'Shows information on an item.',
+    longDesc: 'Shows information about an item, including the description, the ID and which generation the item was introduced in.'
+}
+
+module.exports.action = (msg, args) => {
     var itemName = args.toLowerCase();
     if (aliases[itemName]) {
         itemName = aliases[itemName];
     }
     itemName = itemName.toLowerCase();
-    var item;
+    var item = items
     for (var i = 0; i < Object.keys(items).length; i++) {
         if (items[Object.keys(items)[i]].id.toLowerCase() == itemName.replace(" ", "").replace("'", "")) {
             item = items[Object.keys(items)[i]];

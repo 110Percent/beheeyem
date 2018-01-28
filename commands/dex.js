@@ -48,7 +48,16 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
         aliases = require('../data/aliases.js').BattleAliases;
     }
 });
-exports.action = (msg, args) => {
+
+module.exports = {
+    name: 'dex',
+    usage: ['dex <query>'],
+    example: ['dex reuniclus'],
+    shortDesc: 'Shows information on a Pokémon.',
+    longDesc: 'Shows important information on a Pokémon, such as its abilities, base stats and its most recent Pokédex entry.'
+}
+
+module.exports.action = (msg, args) => {
     mm = minimist(args.split(' '));
     mainArgs = mm._.join(' ');
     locale = mm.lang && locales[mm.lang] ? locales[mm.lang] : locales.en;
