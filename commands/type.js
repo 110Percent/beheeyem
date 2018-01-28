@@ -2,7 +2,15 @@ const typeMatchups = require("../data/typechart.js").BattleTypeChart,
     footers = require('../data/footers.js');
 let tFooter;
 
-exports.action = (msg, args) => {
+module.exports = {
+    name: 'type',
+    usage: ['type <type> [type] ...'],
+    example: ['type psychic'],
+    shortDesc: 'Shows the damage modifiers for a set of types. Multiple types can be entered.',
+    longDesc: 'Shows a complete type matchup list for one or more types. This includes damage modifiers towards other types, as well as damage taken from other types.\nRemember that moves can only have one type, so offensive multipliers on type combinations are purely hypothetical.'
+}
+
+module.exports.action = (msg, args) => {
     let def = {
         vulnCheck: false,
         normalCheck: false,

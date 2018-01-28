@@ -3,7 +3,8 @@ const footers = require('../data/footers.js'),
     requireFromUrl = require('require-from-url/sync');
 let tFooter,
     moves,
-    aliases;
+    aliases,
+    match;
 
 request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/moves.js', (err, res, body) => {
     if (!err && res.statusCode == 200) {
@@ -22,7 +23,15 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
     }
 });
 
-exports.action = (msg, args) => {
+module.exports = {
+    name: 'move',
+    usage: ['move <name>'],
+    example: ['move quick attack'],
+    shortDesc: 'Shows information about a move',
+    longDesc: 'Displays information about a move, such as typing, base power (if any), effects, Smogon viablilty ratings and more.'
+}
+
+module.exports.action = (msg, args) => {
     var moveName = args.toLowerCase();
     if (aliases[moveName]) {
         itemName = aliases[moveName];

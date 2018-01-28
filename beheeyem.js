@@ -58,6 +58,7 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
 
             if (commands[cmd]) { // If a command by the name of the attempted name exists, try to fire it
                 try {
+                    console.log(commands[cmd]);
                     commands[cmd].action(msg, args, beheeyem);
                 } catch (err) {
                     console.error(err); // If unsuccessful, log the error.
