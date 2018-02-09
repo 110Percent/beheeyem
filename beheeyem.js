@@ -59,7 +59,6 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
 
             if (commands[cmd]) { // If a command by the name of the attempted name exists, try to fire it
                 try {
-                    console.log(commands[cmd]);
                     commands[cmd].action(msg, args, beheeyem);
                 } catch (err) {
                     console.error(err); // If unsuccessful, log the error.
@@ -137,7 +136,6 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
         if (isFound) return;
         for (var i = 1; i < splits[j].length - 1; i++) { // Check each substring between asterixes/underscores
             pokeName = splits[j][i].toLowerCase();
-            console.log(pokeName);
             if (italics[pokeName]) {
                 if (pokeCount > 1) break;
                 if (pokePast.indexOf(pokeName) != -1) continue;
