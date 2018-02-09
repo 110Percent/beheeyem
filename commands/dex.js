@@ -150,7 +150,7 @@ module.exports.action = (msg, args) => {
 
         let imgPoke = poke.toLowerCase()
 
-        let imageURL = 'https://github.com/110Percent/beheeyem-data/raw/master/webp/' + imgPoke.replace(" ", "") + ".webp";
+        let imageURL = 'https://play.pokemonshowdown.com/sprites/xyani/' + imgPoke.replace(" ", "") + ".gif";
 
         var pokedexEntry = dexEntries[pokeEntry.num] ? dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText : 'No data found.';
         if (!pokedexEntry) {
