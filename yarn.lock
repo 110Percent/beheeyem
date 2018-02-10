@@ -806,6 +806,10 @@ long@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/long/-/long-3.2.0.tgz#d821b7138ca1cb581c172990ef14db200b5c474b"
 
+markovchain-generate@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/markovchain-generate/-/markovchain-generate-1.0.11.tgz#5f745a7586eb41e1d014db26ae8f4bccb5d730ac"
+
 methods@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
