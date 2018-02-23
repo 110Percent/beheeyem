@@ -1,5 +1,7 @@
 ![](markdown-img/b2logo.png)
 
+Travis information:  [![Build Status](https://travis-ci.org/110Percent/beheeyem.svg?branch=master)](https://travis-ci.org/110Percent/beheeyem)
+
 Accessing Pokémon information on Discord has never been this easy!  
   
 Discord is aimed at a specific target platform: Gamers. Over the past nearly two years, Discord has gathered together millions of gamers to connect with each other. A popular game played amongst these users is Pokémon. Whether it's the nostalgic feel of climbing aboard the *S.S. Anne*, or the adrenaline rush of finally getting to the Elite Four Champion, Pokémon has always been a cherished series for a variety of people.  
