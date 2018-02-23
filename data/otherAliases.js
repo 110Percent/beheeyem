@@ -34,7 +34,9 @@ let aDefault = {
     'tapu koko': 'tapukoko',
     'tapu lele': 'tapulele',
     'tapu bulu': 'tapubulu',
-    'tapu fini': 'tapufini'
+    'tapu fini': 'tapufini',
+    'mene': 'cosmog',
+    'tallow': 'zangoose'
 }
 
 let custom = {
@@ -49,7 +51,6 @@ let custom = {
     'skul': 'totodile',
     'orn': 'decidueye-shiny',
     'jordan': 'dewott',
-    'mene': 'cosmog',
     'minty': 'archeops',
     'sapph': 'glaceon',
     'swed': 'vaporeon',
