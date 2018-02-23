@@ -28,6 +28,6 @@
     "license": "MIT",
     "scripts": {
         "start": "node beheeyem.js",
-        "test": "jshint beheeyem.js"
+        "test": "jshint beheeyem.js; jshint commands"
     }
 }

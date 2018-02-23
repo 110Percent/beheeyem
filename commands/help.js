@@ -1,7 +1,7 @@
 const footers = require('../data/footers.js'),
     config = require('../config'),
     fs = require('fs'),
-    reload = require('require-reload')(require)
+    reload = require('require-reload')(require);
 let tFooter,
     commands = {},
     fields = [],
@@ -11,7 +11,7 @@ module.exports = {
     name: 'help',
     usage: ['help [command]'],
     shortDesc: 'Displays a list of helpful commands.',
-}
+};
 
 let files = fs.readdirSync('./commands');
 for (let i = 0; i < files.length; i++) {
@@ -29,7 +29,7 @@ for (let i in commands) {
 
 
 module.exports.action = (msg, args) => {
-    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+    tFooter = Math.floor(Math.random() * 15) === 0 ? {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
     } : null;
@@ -40,7 +40,7 @@ module.exports.action = (msg, args) => {
                 fields: fields,
                 footer: tFooter
             }
-        })
+        });
     } else {
         let checkString = args.split(' ')[0];
         if (commands[checkString]) {
@@ -57,7 +57,7 @@ module.exports.action = (msg, args) => {
                     ],
                     footer: tFooter
                 }
-            })
+            });
         }
     }
-}
+};

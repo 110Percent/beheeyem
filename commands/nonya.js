@@ -5,4 +5,4 @@ exports.action = (msg, args) => {
         file: selectedNonya,
         name: "nonya." + selectedNonya.split(".")[selectedNonya.split(".").length - 1]
     });
-}
+};

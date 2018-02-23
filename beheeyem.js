@@ -29,7 +29,7 @@ beheeyem.on("ready", function() {
 });
 
 function loadCommands() {
-    console.log('Loading commands...'.cyan)
+    console.log('Loading commands...'.cyan);
     let commands = {}, // Initialize values
         errCount = 0;
     cmdfiles = fs.readdirSync('./commands/'); // Read files in the commands directory
@@ -88,7 +88,7 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
                                     },
                                     {
                                         name: "Output",
-                                        value: String(eval(args))
+                                        value: String(eval(args)) // jshint ignore:line
                                     }
                                 ],
                                 color: 5561189
@@ -166,7 +166,8 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
             pokePast.push(imgPoke);
             if (species.indexOf(imgPoke) > -1) pokeCount++;
             if (isShiny) urlBuild = 'https://play.pokemonshowdown.com/sprites/xyani-shiny/';
-            request(urlBuild + imgPoke + ".gif", (err, response) => {; // Check to see if the sprite for the desired Pokemon exists
+            /* jshint ignore:start */
+            request(urlBuild + imgPoke + ".gif", (err, response) => { // Check to see if the sprite for the desired Pokemon exists
                 if (!err && response.statusCode == 200) {
                     msg.channel.send('', { // If it does, send it  
                         file: response.request.href
@@ -174,6 +175,7 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
                     isFound = true;
                 }
             });
+            /* jshint ignore:end */
             if (isFound) break;
         }
     }

@@ -32,7 +32,7 @@ module.exports = {
     example: ['item soothe bell'],
     shortDesc: 'Shows information on an item.',
     longDesc: 'Shows information about an item, including the description, the ID and which generation the item was introduced in.'
-}
+};
 
 module.exports.action = (msg, args) => {
     var itemName = args.toLowerCase();
@@ -40,7 +40,7 @@ module.exports.action = (msg, args) => {
         itemName = aliases[itemName];
     }
     itemName = itemName.toLowerCase();
-    var item = items
+    let item;
     for (var i = 0; i < Object.keys(items).length; i++) {
         if (items[Object.keys(items)[i]].id.toLowerCase() == itemName.replace(" ", "").replace("'", "")) {
             item = items[Object.keys(items)[i]];
@@ -48,7 +48,7 @@ module.exports.action = (msg, args) => {
         }
     }
     if (item) {
-        tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        tFooter = Math.floor(Math.random() * 15) === 0 ? {
             text: footers[Math.floor(Math.random() * footers.length)],
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
         } : {
@@ -84,14 +84,14 @@ module.exports.action = (msg, args) => {
     } else {
         let dym = match.get(args);
         let dymString;
-        if (dym == null) {
+        if (dym === null) {
             dymString = 'Check your spelling and try again.';
         } else {
             dymString = `Did you mean \`${dym}\`?`;
         }
         msg.channel.send("⚠ Item not found! " + dymString);
     }
-}
+};
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

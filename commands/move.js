@@ -29,7 +29,7 @@ module.exports = {
     example: ['move quick attack'],
     shortDesc: 'Shows information about a move',
     longDesc: 'Displays information about a move, such as typing, base power (if any), effects, Smogon viablilty ratings and more.'
-}
+};
 
 module.exports.action = (msg, args) => {
     var moveName = args.toLowerCase();
@@ -38,7 +38,7 @@ module.exports.action = (msg, args) => {
     }
     var move = moves[moveName];
     if (!move) {
-        for (var i = 0; i < Object.keys(moves).length; i++) {
+        for (let i = 0; i < Object.keys(moves).length; i++) {
             if (moves[Object.keys(moves)[i]].num == moveName) {
                 move = moves[Object.keys(moves)[i]];
                 break;
@@ -46,7 +46,7 @@ module.exports.action = (msg, args) => {
         }
     }
     if (!move) {
-        for (var i = 0; i < Object.keys(moves).length; i++) {
+        for (let i = 0; i < Object.keys(moves).length; i++) {
             if (moves[Object.keys(moves)[i]].name.toLowerCase() == moveName) {
                 move = moves[Object.keys(moves)[i]];
                 break;
@@ -62,7 +62,7 @@ module.exports.action = (msg, args) => {
             descString = move.shortDesc;
         }
         var accuracyString;
-        if (move.accuracy == true) {
+        if (move.accuracy === true) {
             accuracyString = "Certain Success";
         } else {
             accuracyString = move.accuracy;
@@ -85,7 +85,7 @@ module.exports.action = (msg, args) => {
         } else {
             crystalString = "None";
         }
-        tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        tFooter = Math.floor(Math.random() * 15) === 0 ? {
             text: footers[Math.floor(Math.random() * footers.length)],
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
         } : {
@@ -148,7 +148,7 @@ module.exports.action = (msg, args) => {
         console.log(`Sending move ${move.name} to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(move.name) + "**", { embed: embedObject });
     }
-}
+};
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

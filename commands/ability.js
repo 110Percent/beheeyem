@@ -30,11 +30,12 @@ module.exports = {
     example: ['ability static'],
     shortDesc: 'Shows information on an ability.',
     longDesc: 'Shows the effects of a Pokémon\'s ability, as well as how useful the ability is to have.'
-}
+};
 
 
 module.exports.action = (msg, args) => {
-    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+    let ability;
+    tFooter = Math.floor(Math.random() * 15) === 0 ? {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
     } : null;
@@ -45,7 +46,7 @@ module.exports.action = (msg, args) => {
     abilityName = abilityName.toLowerCase();
     for (var i = 0; i < Object.keys(abilities).length; i++) {
         if (abilities[Object.keys(abilities)[i]].name.toLowerCase() == abilityName) {
-            var ability = abilities[Object.keys(abilities)[i]];
+            ability = abilities[Object.keys(abilities)[i]];
             break;
         }
     }
@@ -77,14 +78,14 @@ module.exports.action = (msg, args) => {
     } else {
         let dym = match.get(args);
         let dymString;
-        if (dym == null) {
+        if (dym === null) {
             dymString = 'Check your spelling and try again.';
         } else {
             dymString = `Did you mean \`${dym}\`?`;
         }
         msg.channel.send("⚠ Ability not found! " + dymString);
     }
-}
+};
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

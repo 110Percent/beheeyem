@@ -10,7 +10,7 @@ exports.action = (msg, args) => {
                     msg.channel.send('How are you even reading this die?');
                 }
             } else {
-                msg.channel.send('That doesn\'t look like a positive integer to me. (I\'m not good at parsing words as numbers, sorry...)')
+                msg.channel.send('That doesn\'t look like a positive integer to me. (I\'m not good at parsing words as numbers, sorry...)');
             }
         } else {
             var numDice = (args.split("d")[0]);
@@ -39,7 +39,7 @@ exports.action = (msg, args) => {
     }
     if (dice.length > 0) {
         msg.channel.send("🎲 Rolled `" + dice.join("` `") + "`.");
-    } else if (rnd != null) {
+    } else if (rnd !== null) {
         msg.channel.send("🎲 Rolled `" + rnd + "`");
     }
-}
+};

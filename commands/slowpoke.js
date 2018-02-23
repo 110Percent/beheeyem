@@ -7,4 +7,4 @@ exports.action = (msg) => {
 
         });
     }, 45000);
-}
+};

@@ -8,7 +8,7 @@ module.exports = {
     example: ['type psychic'],
     shortDesc: 'Shows the damage modifiers for a set of types. Multiple types can be entered.',
     longDesc: 'Shows a complete type matchup list for one or more types. This includes damage modifiers towards other types, as well as damage taken from other types.\nRemember that moves can only have one type, so offensive multipliers on type combinations are purely hypothetical.'
-}
+};
 
 module.exports.action = (msg, args) => {
     let def = {
@@ -54,7 +54,7 @@ module.exports.action = (msg, args) => {
             var toType = capitalizeFirstLetter(argsSplit);
             displayTypes.push(toType);
             var dTaken = typeMatchups[toType].damageTaken;
-            for (toMatch in dTaken) {
+            for (let toMatch in dTaken) {
                 if (def.multi[toMatch]) {
                     if (dTaken[toMatch] == 1) {
                         def.multi[toMatch] *= 2;
@@ -65,7 +65,7 @@ module.exports.action = (msg, args) => {
                     }
                 }
             }
-            for (toMatch in typeMatchups) {
+            for (let toMatch in typeMatchups) {
                 if (atk.multi[toMatch]) {
                     if (typeMatchups[toMatch].damageTaken[toType] == 1) {
                         atk.multi[toMatch] *= 2;
@@ -76,50 +76,50 @@ module.exports.action = (msg, args) => {
                     }
                 }
             }
-            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            for (let i = 0; i < Object.keys(def.multi).length; i++) {
                 if (def.multi[Object.keys(def.multi)[i]] > 1) {
                     def.vulnCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            for (let i = 0; i < Object.keys(def.multi).length; i++) {
                 if (def.multi[Object.keys(def.multi)[i]] == 1) {
                     def.normalCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(def.multi).length; i++) {
+            for (let i = 0; i < Object.keys(def.multi).length; i++) {
                 if (def.multi[Object.keys(def.multi)[i]] > 0 && def.multi[Object.keys(def.multi)[i]] < 1) {
                     def.resistCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(def.multi).length; i++) {
-                if (def.multi[Object.keys(def.multi)[i]] == 0) {
+            for (let i = 0; i < Object.keys(def.multi).length; i++) {
+                if (def.multi[Object.keys(def.multi)[i]] === 0) {
                     def.noCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            for (let i = 0; i < Object.keys(atk.multi).length; i++) {
                 if (atk.multi[Object.keys(atk.multi)[i]] > 1) {
                     atk.vulnCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            for (let i = 0; i < Object.keys(atk.multi).length; i++) {
                 if (atk.multi[Object.keys(atk.multi)[i]] == 1) {
                     atk.normalCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+            for (let i = 0; i < Object.keys(atk.multi).length; i++) {
                 if (atk.multi[Object.keys(atk.multi)[i]] > 0 && atk.multi[Object.keys(atk.multi)[i]] < 1) {
                     atk.resistCheck = true;
                     break;
                 }
             }
-            for (var i = 0; i < Object.keys(atk.multi).length; i++) {
-                if (atk.multi[Object.keys(atk.multi)[i]] == 0) {
+            for (let i = 0; i < Object.keys(atk.multi).length; i++) {
+                if (atk.multi[Object.keys(atk.multi)[i]] === 0) {
                     atk.noCheck = true;
                     break;
                 }
@@ -128,7 +128,7 @@ module.exports.action = (msg, args) => {
 
     }
     if (def.vulnCheck) {
-        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+        for (let i = 0; i < Object.keys(def.multi).length; i++) {
             if (def.multi[Object.keys(def.multi)[i]] > 1 && def.vulnRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
                 def.vulnTypes.push(Object.keys(def.multi)[i] + " (x" + def.multi[Object.keys(def.multi)[i]] + ")");
                 def.vulnRaw.push(Object.keys(def.multi)[i]);
@@ -137,7 +137,7 @@ module.exports.action = (msg, args) => {
         def.vulnDisplay[0] = "Vulnerable to: " + def.vulnTypes.join(", ");
     }
     if (def.normalCheck) {
-        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+        for (let i = 0; i < Object.keys(def.multi).length; i++) {
             if (def.multi[Object.keys(def.multi)[i]] == 1 && def.normalRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
                 def.normalTypes.push(Object.keys(def.multi)[i]);
                 def.normalRaw.push(Object.keys(def.multi)[i]);
@@ -146,7 +146,7 @@ module.exports.action = (msg, args) => {
         def.vulnDisplay[1] = "Takes normal damage from: " + def.normalTypes.join(", ");
     }
     if (def.resistCheck) {
-        for (var i = 0; i < Object.keys(def.multi).length; i++) {
+        for (let i = 0; i < Object.keys(def.multi).length; i++) {
             if (def.multi[Object.keys(def.multi)[i]] > 0 && def.multi[Object.keys(def.multi)[i]] < 1 && def.resistRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
                 def.resistTypes.push(Object.keys(def.multi)[i] + " (x" + def.multi[Object.keys(def.multi)[i]] + ")");
                 def.resistRaw.push(Object.keys(def.multi)[i]);
@@ -155,8 +155,8 @@ module.exports.action = (msg, args) => {
         def.vulnDisplay[2] = "Resists: " + def.resistTypes.join(", ");
     }
     if (def.noCheck) {
-        for (var i = 0; i < Object.keys(def.multi).length; i++) {
-            if (def.multi[Object.keys(def.multi)[i]] == 0 && def.noRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
+        for (let i = 0; i < Object.keys(def.multi).length; i++) {
+            if (def.multi[Object.keys(def.multi)[i]] === 0 && def.noRaw.indexOf(Object.keys(def.multi)[i]) == -1) {
                 def.noTypes.push(Object.keys(def.multi)[i]);
                 def.noRaw.push(Object.keys(def.multi)[i]);
             }
@@ -165,7 +165,7 @@ module.exports.action = (msg, args) => {
     }
 
     if (atk.vulnCheck) {
-        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+        for (let i = 0; i < Object.keys(atk.multi).length; i++) {
             if (atk.multi[Object.keys(atk.multi)[i]] > 1 && atk.vulnRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
                 atk.vulnTypes.push(Object.keys(atk.multi)[i] + " (x" + atk.multi[Object.keys(atk.multi)[i]] + ")");
                 atk.vulnRaw.push(Object.keys(atk.multi)[i]);
@@ -174,7 +174,7 @@ module.exports.action = (msg, args) => {
         atk.vulnDisplay[0] = "Supereffective against: " + atk.vulnTypes.join(", ");
     }
     if (atk.normalCheck) {
-        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+        for (let i = 0; i < Object.keys(atk.multi).length; i++) {
             if (atk.multi[Object.keys(atk.multi)[i]] == 1 && atk.normalRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
                 atk.normalTypes.push(Object.keys(atk.multi)[i]);
                 atk.normalRaw.push(Object.keys(atk.multi)[i]);
@@ -183,7 +183,7 @@ module.exports.action = (msg, args) => {
         atk.vulnDisplay[1] = "Deals normal damage to: " + atk.normalTypes.join(", ");
     }
     if (atk.resistCheck) {
-        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
+        for (let i = 0; i < Object.keys(atk.multi).length; i++) {
             if (atk.multi[Object.keys(atk.multi)[i]] > 0 && atk.multi[Object.keys(atk.multi)[i]] < 1 && atk.resistRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
                 atk.resistTypes.push(Object.keys(atk.multi)[i] + " (x" + atk.multi[Object.keys(atk.multi)[i]] + ")");
                 atk.resistRaw.push(Object.keys(atk.multi)[i]);
@@ -192,15 +192,15 @@ module.exports.action = (msg, args) => {
         atk.vulnDisplay[2] = "Not very effective against: " + atk.resistTypes.join(", ");
     }
     if (atk.noCheck) {
-        for (var i = 0; i < Object.keys(atk.multi).length; i++) {
-            if (atk.multi[Object.keys(atk.multi)[i]] == 0 && atk.noRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
+        for (let i = 0; i < Object.keys(atk.multi).length; i++) {
+            if (atk.multi[Object.keys(atk.multi)[i]] === 0 && atk.noRaw.indexOf(Object.keys(atk.multi)[i]) == -1) {
                 atk.noTypes.push(Object.keys(atk.multi)[i]);
                 atk.noRaw.push(Object.keys(atk.multi)[i]);
             }
         }
         atk.vulnDisplay[3] = "Doesn't affect: " + atk.noTypes.join(", ");
     }
-    tFooter = Math.floor(Math.random() * 15) == 0 ? {
+    tFooter = Math.floor(Math.random() * 15) === 0 ? {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
     } : null;
@@ -219,8 +219,8 @@ module.exports.action = (msg, args) => {
             ],
             footer: tFooter
         }
-    })
-}
+    });
+};
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

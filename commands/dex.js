@@ -55,7 +55,7 @@ module.exports = {
     example: ['dex reuniclus'],
     shortDesc: 'Shows information on a Pokémon.',
     longDesc: 'Shows important information on a Pokémon, such as its abilities, base stats and its most recent Pokédex entry.'
-}
+};
 
 module.exports.action = (msg, args) => {
     mm = minimist(args.split(' '));
@@ -81,7 +81,7 @@ module.exports.action = (msg, args) => {
     }
     var pokeEntry = dex[poke];
     if (!pokeEntry) {
-        for (var i = 0; i < Object.keys(dex).length; i++) {
+        for (let i = 0; i < Object.keys(dex).length; i++) {
             if (dex[Object.keys(dex)[i]].num == Number(poke)) {
                 poke = dex[Object.keys(dex)[i]].species.toLowerCase();
                 pokeEntry = dex[poke];
@@ -90,7 +90,7 @@ module.exports.action = (msg, args) => {
         }
     }
     if (!pokeEntry) {
-        for (var i = 0; i < Object.keys(dex).length; i++) {
+        for (let i = 0; i < Object.keys(dex).length; i++) {
             if (dex[Object.keys(dex)[i]].species.toLowerCase() == poke) {
                 pokeEntry = dex[Object.keys(dex)[i]];
                 break;
@@ -111,7 +111,7 @@ module.exports.action = (msg, args) => {
             }
             evoLine = preEvos + evoLine;
         }
-        var evos = ""
+        var evos = "";
         if (pokeEntry.evos) {
             evos = evos + " > " + pokeEntry.evos.map(entry => capitalizeFirstLetter(entry)).join(", ");
             if (pokeEntry.evos.length < 2) {
@@ -132,13 +132,13 @@ module.exports.action = (msg, args) => {
         var abilityString = pokeEntry.abilities[0];
         for (var i = 1; i < Object.keys(pokeEntry.abilities).length; i++) {
             if (Object.keys(pokeEntry.abilities)[i] == 'H') {
-                abilityString = abilityString + ", *" + pokeEntry.abilities['H'] + "*";
+                abilityString = abilityString + ", *" + pokeEntry.abilities.H + "*";
             } else {
                 abilityString = abilityString + ", " + pokeEntry.abilities[i];
             }
         }
 
-        if (abilityString == '' || abilityString == undefined) abilityString = 'None';
+        if (abilityString === '' || abilityString === undefined) abilityString = 'None';
         var imagefetch = pokeEntry.num;
         if (imagefetch < 100) {
             imagefetch = "0" + imagefetch;
@@ -148,15 +148,11 @@ module.exports.action = (msg, args) => {
         }
         imagefetch = imagefetch + capitalizeFirstLetter(poke) + ".png";
 
-        let imgPoke = poke.toLowerCase()
+        let imgPoke = poke.toLowerCase(),
+            imageURL = 'https://play.pokemonshowdown.com/sprites/xyani/' + imgPoke.replace(" ", "") + ".gif",
+            pokedexEntry = dexEntries[pokeEntry.num] ? dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id; })[0].flavourText : 'No data found.';
 
-        let imageURL = 'https://play.pokemonshowdown.com/sprites/xyani/' + imgPoke.replace(" ", "") + ".gif";
-
-        var pokedexEntry = dexEntries[pokeEntry.num] ? dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id })[0].flavourText : 'No data found.';
-        if (!pokedexEntry) {
-            var pokedexEntry = "*An unknown error occurred.*";
-        }
-        tFooter = Math.floor(Math.random() * 15) == 0 ? {
+        tFooter = Math.floor(Math.random() * 15) === 0 ? {
             text: footers[Math.floor(Math.random() * footers.length)],
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
         } : {
@@ -226,14 +222,14 @@ module.exports.action = (msg, args) => {
     } else {
         let dym = match.get(mainArgs);
         let dymString;
-        if (dym == null) {
+        if (dym === null) {
             dymString = 'Maybe you misspelt the Pokémon\'s name?';
         } else {
             dymString = `Did you mean \`${dym}\`?`;
         }
         msg.channel.send("⚠ Dex entry not found! " + dymString);
     }
-}
+};
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

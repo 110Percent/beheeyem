@@ -20,4 +20,4 @@ exports.action = (msg) => {
     let genString = chain.generateString();
     if (!genString.endsWith('.')) genString += '.';
     msg.channel.send(genString);
-}
+};
