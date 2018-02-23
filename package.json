@@ -27,6 +27,7 @@
     "author": "110Percent",
     "license": "MIT",
     "scripts": {
-        "start": "node beheeyem.js"
+        "start": "node beheeyem.js",
+        "test": "jshint beheeyem.js"
     }
 }
