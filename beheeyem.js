@@ -154,12 +154,17 @@ function checkItalics(msg) { // Function to be fired if a message is valid for i
                 if (pokeName == r) pokeName = a[r];
                 if (pokeName.indexOf(` ${r} `) > -1) pokeName = pokeName.replace(` ${r} `, ` ${a[r]} `);
             }
-            pokeName = pokeName.replace(" ", "-");
+            if (pokeName.split(" ")[0] == "mega") {
+                pokeName = pokeName.substring(pokeName.split(" ")[0].length + 1) + "-mega";
+            } else if (pokeName.split(' ')[0] == "alolan") {
+                pokeName = pokeName.substring(pokeName.split(" ")[0].length + 1) + "-alola";
+            }
             if (pokeName.indexOf('shiny') != -1) { // Detect if the potential pokemon is a shiny
                 isShiny = true;
                 pokeName = pokeName.replace(' shiny', '').replace('shiny ', '').replace('-shiny', '').replace('shiny-', '').replace('shiny', '');
 
             }
+            pokeName = pokeName.replace(" ", "-");
             let imgPoke = pokeName.toLowerCase();
             if (pokeCount > 1) break;
             if (pokePast.indexOf(imgPoke) != -1) continue;
