@@ -113,6 +113,9 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
                     }
                 }
             }
+        } else if (msg.content == beheeyem.user) {
+            msg.react(beheeyem.emojis.get('328348788202799109'))
+                .catch(console.error)
         } else { // If a command was fired, do not check for italics in the messsage.
             checkItalics(msg);
         }
