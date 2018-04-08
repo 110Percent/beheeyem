@@ -8,6 +8,7 @@ module.exports = {
         weight: 'Weight',
         eggs: 'Egg Groups',
         dex: 'Dex Entry (Ultra Sun/Ultra Moon)',
+        tier: 'Smogon Tier',
         resources: 'External Resources'
     },
     'fr': {
@@ -19,6 +20,7 @@ module.exports = {
         weight: 'Poids',
         eggs: 'Groupe œuf',
         dex: 'Descriptions du Pokédex (Ultra-Soleil/Ultra-Lune)',
+        tier: 'Classement Smogon',
         resources: 'Ressources Extérieur'
     },
     'jp': {
@@ -30,6 +32,7 @@ module.exports = {
         weight: 'おもさ',
         eggs: 'タマゴグループ',
         dex: '説明文',
+        tier: 'スモゴンランク',
         resources: '対外 出所'
     }
 }

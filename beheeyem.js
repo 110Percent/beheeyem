@@ -5,10 +5,10 @@ const Discord = require("discord.js"), // Require Node modules and initialize Di
     path = require("path"),
     request = require("request"),
     colors = require('colors'),
-    otherAliases = require('./data/otherAliases.js'),
     italics = require('./data/italics.js'),
     requireFromUrl = require('require-from-url');
 var config = require('./config.js'),
+    otherAliases = require('./data/otherAliases.js'),
     imageCheck,
     dex = require('./data/pokedex.js').BattlePokedex,
     species = [],

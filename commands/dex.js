@@ -12,6 +12,7 @@ const request = require('request'),
     otherAliases = require('../data/otherAliases.js');
 let dex,
     aliases,
+    formats,
     match,
     tFooter,
     mm,
@@ -48,6 +49,14 @@ request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/al
         aliases = require('../data/aliases.js').BattleAliases;
     }
 });
+request('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/formats-data.js', (err, res, body) => {
+    if (!err && res.statusCode == 200) {
+        formats = requireFromUrl('https://raw.githubusercontent.com/Zarel/Pokemon-Showdown/master/data/formats-data.js').BattleFormatsData;
+    } else {
+        console.log('Error fetching Showdown aliases; Switching to local aliases...');
+        formats = require('../data/aliases.js').BattleFormatsData;
+    }
+});
 
 module.exports = {
     name: 'dex',
@@ -80,11 +89,13 @@ module.exports.action = (msg, args) => {
         poke = poke.substring(poke.split(" ")[0].length + 1) + "-alola";
     }
     var pokeEntry = dex[poke];
+    let format = formats[poke];
     if (!pokeEntry) {
         for (let i = 0; i < Object.keys(dex).length; i++) {
             if (dex[Object.keys(dex)[i]].num == Number(poke)) {
                 poke = dex[Object.keys(dex)[i]].species.toLowerCase();
                 pokeEntry = dex[poke];
+                format = formats[poke];
                 break;
             }
         }
@@ -93,13 +104,20 @@ module.exports.action = (msg, args) => {
         for (let i = 0; i < Object.keys(dex).length; i++) {
             if (dex[Object.keys(dex)[i]].species.toLowerCase() == poke) {
                 pokeEntry = dex[Object.keys(dex)[i]];
+                format = formats[Object.keys(dex)[i]];
                 break;
             }
         }
     }
+    if (!pokeEntry) {
+        if (poke == 'random') {
+            poke = Object.keys(dex)[Math.floor(Math.random() * Object.keys(dex).length)];
+            pokeEntry = dex[poke];
+            format = formats[poke];
+        }
+    }
     if (pokeEntry) {
         let imgDimensions = {};
-
         poke = pokeEntry.species;
         var evoLine = "**" + capitalizeFirstLetter(poke) + "**",
             preEvos = "";
@@ -195,8 +213,13 @@ module.exports.action = (msg, args) => {
                     inline: true
                 },
                 {
+                    name: locale.tier,
+                    value: format.tier,
+                    inline: true
+                },
+                {
                     name: locale.eggs,
-                    value: pokeEntry.eggGroups.join(", ")
+                    value: pokeEntry.eggGroups.join(", "),
                 },
                 {
                     name: locale.dex,
