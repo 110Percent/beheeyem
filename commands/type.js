@@ -200,10 +200,14 @@ module.exports.action = (msg, args) => {
         }
         atk.vulnDisplay[3] = "Doesn't affect: " + atk.noTypes.join(", ");
     }
-    tFooter = Math.floor(Math.random() * 15) === 0 ? {
+    /*tFooter = Math.floor(Math.random() * 15) === 0 ? {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
-    } : null;
+    } : null;*/
+    tFooter = {
+        text: 'Support Beheeyem by becoming a patron! https://patreon.com/beheeyem',
+        icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+    }
     console.log(`Sending type(s) ${displayTypes.join(', ')} to guild ${msg.guild.name}`);
     msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + displayTypes.join(", ") + "**", {
         embed: {

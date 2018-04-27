@@ -35,10 +35,14 @@ module.exports = {
 
 module.exports.action = (msg, args) => {
     let ability;
-    tFooter = Math.floor(Math.random() * 15) === 0 ? {
+    /*tFooter = Math.floor(Math.random() * 15) === 0 ? {
         text: footers[Math.floor(Math.random() * footers.length)],
         icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
-    } : null;
+    } : null;*/
+    tFooter = {
+        text: 'Support Beheeyem by becoming a patron! https://patreon.com/beheeyem',
+        icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+    }
     let abilityName = args.toLowerCase();
     if (aliases[abilityName]) {
         abilityName = aliases[abilityName];

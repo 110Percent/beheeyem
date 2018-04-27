@@ -170,13 +170,17 @@ module.exports.action = (msg, args) => {
             imageURL = 'https://play.pokemonshowdown.com/sprites/xyani/' + imgPoke.replace(" ", "") + ".gif",
             pokedexEntry = dexEntries[pokeEntry.num] ? dexEntries[pokeEntry.num].filter((c) => { return c.langID == locale.id; })[0].flavourText : 'No data found.';
 
-        tFooter = Math.floor(Math.random() * 15) === 0 ? {
+        /*tFooter = Math.floor(Math.random() * 15) === 0 ? {
             text: footers[Math.floor(Math.random() * footers.length)],
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
         } : {
             text: "#" + pokeEntry.num,
             icon_url: "https://cdn.rawgit.com/msikma/pokesprite/master/icons/pokemon/regular/" + poke.replace(" ", "-").toLowerCase() + ".png"
-        };
+        };*/
+        tFooter = {
+            text: 'Support Beheeyem by becoming a patron! https://patreon.com/beheeyem',
+            icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+        }
         let totalStats = 0;
         for (let i in pokeEntry.baseStats) {
             totalStats += pokeEntry.baseStats[i];

@@ -48,13 +48,17 @@ module.exports.action = (msg, args) => {
         }
     }
     if (item) {
-        tFooter = Math.floor(Math.random() * 15) === 0 ? {
+        /*tFooter = Math.floor(Math.random() * 15) === 0 ? {
             text: footers[Math.floor(Math.random() * footers.length)],
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
         } : {
             text: capitalizeFirstLetter(item.name),
             icon_url: "https://raw.githubusercontent.com/110Percent/beheeyem-data/master/sprites/items/" + item.name.toLowerCase().replace(" ", "-") + ".png"
-        };
+        };*/
+        tFooter = {
+            text: 'Support Beheeyem by becoming a patron! https://patreon.com/beheeyem',
+            icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
+        }
         console.log(`Sending item ${item.name} to guild ${msg.guild.name}`);
         msg.channel.send("\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\n**" + capitalizeFirstLetter(item.name) + "**", {
             embed: {
