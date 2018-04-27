@@ -180,7 +180,7 @@ module.exports.action = (msg, args) => {
         tFooter = {
             text: 'Support Beheeyem by becoming a patron! https://patreon.com/beheeyem',
             icon_url: 'https://cdn.rawgit.com/110Percent/beheeyem/gh-pages/include/favicon.png'
-        }
+        };
         let totalStats = 0;
         for (let i in pokeEntry.baseStats) {
             totalStats += pokeEntry.baseStats[i];
