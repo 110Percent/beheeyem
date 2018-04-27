@@ -23,7 +23,7 @@ var commands = loadCommands(); // Load commands into the commands object
 
 beheeyem.on("ready", function() {
     console.log(("Beheeyem is active! Currently serving in " + String(beheeyem.guilds.size).white + " guilds.\n".green).bold);
-    beheeyem.user.setActivity("b.help"); //Set "playing" status on the user's profile
+    beheeyem.user.setActivity('patreon.com/beheeyem', { type: 3 }); //Set "playing" status on the user's profile
 
 
 });
