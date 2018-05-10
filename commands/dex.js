@@ -218,7 +218,7 @@ module.exports.action = (msg, args) => {
                 },
                 {
                     name: locale.tier,
-                    value: format.tier,
+                    value: format.tier ? format.tier : '?',
                     inline: true
                 },
                 {
