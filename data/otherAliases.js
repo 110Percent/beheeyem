@@ -6,6 +6,7 @@ Object.keys(dex).map(function(key, index) {
 
 let aDefault = () => {
     return {
+        'ace': 'suicune',
         'amph': 'ampharos-mega',
         'baru': 'arcanine',
         'bounty': 'porygonz-shiny',
@@ -34,11 +35,14 @@ let aDefault = () => {
         'necrozma-dusk-mane': 'necrozma-duskmane',
         'necrozma-dusk': 'necrozma-duskmane',
         'ngb': 'ampharos',
+        'poiklers': 'volcarona-shiny',
         'prandom': species[Math.floor(Math.random() * species.length)],
         'quote': 'sableye',
+        'romulator': 'mawile',
         'runtime': 'lapras',
         'semper': 'flygon',
         'shep': 'ampharos-mega',
+        'sigma': 'gliscor-shiny',
         'sol': 'solrock',
         'stall': 'sableye-mega',
         'surv': 'espeon',
@@ -56,7 +60,6 @@ let aDefault = () => {
 }
 
 let custom = {
-    'ace': 'suicune',
     'blue': 'popplio',
     'emily': 'luxio',
     'erebus': 'meowstic',
