@@ -23,7 +23,7 @@ var commands = loadCommands(); // Load commands into the commands object
 
 beheeyem.on("ready", function() {
     console.log(("Beheeyem is active! Currently serving in " + String(beheeyem.guilds.size).white + " guilds.\n".green).bold);
-    beheeyem.user.setActivity('patreon.com/beheeyem', { type: 3 }); //Set "playing" status on the user's profile
+    beheeyem.user.setActivity(`you on shard ${this.shard.id + 1}`, { type: 3 }); //Set "playing" status on the user's profile
 
 
 });
@@ -78,39 +78,41 @@ beheeyem.on("message", msg => { // Fires when a message is sent that can be dete
                 });
             } else if (msg.author.id == 120887602395086848) { // Commands only to be fired by the bot's owner
                 if (cmd == 'eval') {
-                    try {
-                        msg.channel.send("", {
-                            embed: {
-                                title: '🖥 JavaScript Eval',
-                                fields: [{
-                                        name: "Input",
-                                        value: args
-                                    },
-                                    {
-                                        name: "Output",
-                                        value: String(eval(args)) // jshint ignore:line
-                                    }
-                                ],
-                                color: 5561189
-                            }
+                    beheeyem.shard.broadcastEval(args)
+                        .then(results => {
+                            msg.channel.send("", {
+                                embed: {
+                                    title: '🖥 JavaScript Eval',
+                                    fields: [{
+                                            name: "Input",
+                                            value: args
+                                        },
+                                        {
+                                            name: "Output",
+                                            value: String(results) // jshint ignore:line
+                                        }
+                                    ],
+                                    color: 5561189
+                                }
+                            });
+                        })
+                        .catch(err => {
+                            msg.channel.send("", {
+                                embed: {
+                                    title: '⚠ Error',
+                                    fields: [{
+                                            name: "Input",
+                                            value: args
+                                        },
+                                        {
+                                            name: "Error",
+                                            value: err.toString()
+                                        }
+                                    ],
+                                    color: 16724015
+                                }
+                            });
                         });
-                    } catch (err) {
-                        msg.channel.send("", {
-                            embed: {
-                                title: '⚠ Error',
-                                fields: [{
-                                        name: "Input",
-                                        value: args
-                                    },
-                                    {
-                                        name: "Error",
-                                        value: err.toString()
-                                    }
-                                ],
-                                color: 16724015
-                            }
-                        });
-                    }
                 }
             }
         } else if (msg.content == beheeyem.user) {
